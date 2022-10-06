@@ -8,7 +8,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class StartScreenFragment extends Fragment implements View.OnClickListener {
     private EditText usernameEditText;
     private EditText passwordEditText;
 
