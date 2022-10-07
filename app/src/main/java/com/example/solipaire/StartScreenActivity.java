@@ -24,7 +24,11 @@ public class StartScreenActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 
