@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,8 +27,12 @@ public class StartScreenFragment extends Fragment implements View.OnClickListene
         Log.i(null,"StartScreenFragment onCreateView() started");
         View v;
         Activity activity = requireActivity();
-        v = inflater.inflate(R.layout.fragment_startscreen, container, false);
-
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_startscreen_landscape, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_startscreen, container, false);
+        }
         final Button createAccountButton = v.findViewById(R.id.SignUpButton);
         if (createAccountButton != null) {
             createAccountButton.setOnClickListener(this);
@@ -95,6 +100,6 @@ public class StartScreenFragment extends Fragment implements View.OnClickListene
             //GO TO CREATE ACCOUNT SCREEN, DO NOTHING FOR NOW
             Log.i(null,"StartScreenFragment onClick() SignUpButton clicked");
         }
-        Log.i(null,"StartScreenFragment onClick() started");
+        Log.i(null,"StartScreenFragment onClick() finished");
     }
 }
