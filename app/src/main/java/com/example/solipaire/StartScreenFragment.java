@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class StartScreenFragment extends Fragment implements View.OnClickListener {
 
@@ -93,9 +94,14 @@ public class StartScreenFragment extends Fragment implements View.OnClickListene
         Log.i(null,"StartScreenFragment onClick() started");
         final Activity activity = requireActivity();
         final int viewId = view.getId();
-        if (viewId == R.id.LogInButton){
-            //GO TO LOGIN SCREEN, DO NOTHING FOR NOW
+        if (viewId == R.id.LogInButton) {
             Log.i(null,"StartScreenFragment onClick() LogInButton clicked");
+            FragmentManager fm = getParentFragmentManager();
+            Fragment fragment = new LoginFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack("login_fragment")
+                    .commit();
         } else if (viewId == R.id.SignUpButton){
             //GO TO CREATE ACCOUNT SCREEN, DO NOTHING FOR NOW
             Log.i(null,"StartScreenFragment onClick() SignUpButton clicked");

@@ -7,7 +7,7 @@
     tools:context=".StartScreenActivity">
 
     <TextView
-        android:id="@+id/titleCard"
+        android:id="@+id/LogInTitle"
         android:layout_width="361dp"
         android:layout_height="88dp"
         android:layout_marginTop="80dp"
@@ -76,6 +76,6 @@
         app:layout_constraintBottom_toTopOf="@+id/LogInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleCard" />
+        app:layout_constraintTop_toBottomOf="@+id/LogInTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

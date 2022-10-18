@@ -7,7 +7,7 @@
     tools:context=".StartScreenActivity">
 
     <TextView
-        android:id="@+id/titleCard"
+        android:id="@+id/LogInTitle"
         android:layout_width="361dp"
         android:layout_height="88dp"
         android:layout_marginTop="60dp"
@@ -32,7 +32,7 @@
         android:textColor="#000000"
         android:textSize="48sp"
         app:iconTint="#FF0000"
-        app:layout_constraintStart_toEndOf="@+id/titleCard"
+        app:layout_constraintStart_toEndOf="@+id/LogInTitle"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="#FF0000" />
 
@@ -60,6 +60,6 @@
         android:layout_marginTop="20dp"
         android:src="@mipmap/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleCard" />
+        app:layout_constraintTop_toBottomOf="@+id/LogInTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
