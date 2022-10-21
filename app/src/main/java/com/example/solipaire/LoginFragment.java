@@ -1,7 +1,9 @@
 package com.example.solipaire;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,10 +20,14 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private AccountViewModel accountViewModel;
+    private final List<Account> accountList = new CopyOnWriteArrayList<>();
 
 
     @Override
@@ -29,6 +36,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Activity activity = requireActivity();
         accountViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AccountViewModel.class);
+        accountViewModel.getAllAccounts().observe((LifecycleOwner) activity, userAccounts -> {
+            accountList.clear();
+            accountList.addAll(userAccounts);
+        });
         Log.i(null,"LoginFragment onCreate() complete");
     }
 
@@ -106,7 +117,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         final String password = passwordEditText.getText().toString();
         Activity activity = requireActivity();
         Account account = new Account(username, password);
-        //TODO: Finish logIn method
+        if (accountList.contains(account)) {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("name", username);
+            editor.apply();
+            //TODO: Start new activity for game menu
+            activity.finish();
+        } else {
+            FragmentManager manager = getParentFragmentManager();
+            Toast.makeText(activity.getApplicationContext(), "Login Error", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
