@@ -8,9 +8,21 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import java.util.List;
-
 @Dao
 public interface GameDao {
-    //Fill in querys and updates for game data
+    //Fill in queries and updates for game data
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(Game game);
+
+    @Delete
+    void delete(Game game);
+
+    @Update
+    void update(Game game);
+
+    @Query("SELECT * FROM game WHERE account_id LIKE :acctId Limit 1")
+    LiveData<Game> findActiveGame(int acctId);
+
+    @Query("DELETE FROM game WHERE account_id LIKE :acctId")
+    void deleteAllFromAccount(int acctId);
 }

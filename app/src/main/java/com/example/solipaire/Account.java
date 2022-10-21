@@ -1,13 +1,14 @@
 package com.example.solipaire;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Account {
-    @PrimaryKey
-    public String uid;
+    @PrimaryKey(autoGenerate = true)
+    public int uid;
 
     @ColumnInfo
     public String username;
@@ -15,7 +16,12 @@ public class Account {
     @ColumnInfo
     public String password;
 
-    public String getUid() {
+    public Account(@NonNull String username, @NonNull String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public int getUid() {
         return uid;
     }
     public String getUsername() {
