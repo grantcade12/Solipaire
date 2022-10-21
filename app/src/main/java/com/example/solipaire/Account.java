@@ -32,11 +32,6 @@ public class Account {
         return password;
     }
 
-    public Account(@NonNull String name, @NonNull String password){
-        this.username = name;
-        this.password = password;
-    }
-
     @Override
     public boolean equals(Object o) {
         boolean isEqual = false;

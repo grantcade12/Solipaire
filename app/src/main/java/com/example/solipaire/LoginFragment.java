@@ -70,8 +70,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Log.i(null,"LoginFragment onResume() started");
         super.onResume();
         Log.i(null,"LoginFragment onResume() complete");
-        usernameEditText = null;
-        passwordEditText = null;
     }
 
     @Override
@@ -109,6 +107,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onDestroyView() {
         Log.i(null,"LoginFragment onDestroyView() started");
         super.onDestroyView();
+        usernameEditText = null;
+        passwordEditText = null;
         Log.i(null, "LoginFragment onDestroyView() complete");
     }
 
@@ -122,6 +122,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("name", username);
             editor.apply();
+            Toast.makeText(activity.getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
             //TODO: Start new activity for game menu
             activity.finish();
         } else {
@@ -136,10 +137,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Log.i(null,"LoginFragment onClick() started");
         final Activity activity = requireActivity();
         final int viewId = view.getId();
-        if (viewId == R.id.LogInButton){
+        Log.i(null,"" + R.id.LogInButton);
+        //if (viewId == R.id.LogInButton){
             logIn();
             Log.i(null,"LoginFragment onClick() LogInButton clicked");
-        }
+        //}
         Log.i(null,"LoginFragment onClick() finished");
     }
 }

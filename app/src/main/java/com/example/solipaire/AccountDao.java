@@ -24,6 +24,6 @@ public interface AccountDao {
     @Query("SELECT * FROM account")
     LiveData<List<Account>> getAllAccounts();
 
-    @Query("SELECT * FROM account WHERE username LIKE :user AND password LIKE :pass Limit 1")
+    @Query("SELECT uid, username, password FROM account WHERE username LIKE :user AND password LIKE :pass Limit 1")
     LiveData<Account> findByLogin(String user, String pass);
 }
