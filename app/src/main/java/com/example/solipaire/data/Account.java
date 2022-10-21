@@ -1,4 +1,4 @@
-package com.example.solipaire;
+package com.example.solipaire.data;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

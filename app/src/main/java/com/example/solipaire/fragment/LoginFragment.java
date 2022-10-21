@@ -1,4 +1,4 @@
-package com.example.solipaire;
+package com.example.solipaire.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -19,6 +19,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+
+import com.example.solipaire.R;
+import com.example.solipaire.data.Account;
+import com.example.solipaire.viewmodel.AccountViewModel;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

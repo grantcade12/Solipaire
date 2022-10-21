@@ -1,10 +1,13 @@
-package com.example.solipaire;
+package com.example.solipaire.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.example.solipaire.data.Game;
+import com.example.solipaire.data.GameRepository;
 
 
 public class GameViewModel extends AndroidViewModel{

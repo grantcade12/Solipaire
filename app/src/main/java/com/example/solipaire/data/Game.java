@@ -1,9 +1,11 @@
-package com.example.solipaire;
+package com.example.solipaire.data;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.solipaire.Board;
 
 import java.util.ArrayList;
 import java.util.List;

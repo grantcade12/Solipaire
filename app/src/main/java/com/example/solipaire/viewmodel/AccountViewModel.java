@@ -1,10 +1,13 @@
-package com.example.solipaire;
+package com.example.solipaire.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.example.solipaire.data.Account;
+import com.example.solipaire.data.AccountRepository;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class AccountViewModel extends AndroidViewModel{
         allAccts = acctRepo.getAllAccounts();
     }
 
-    LiveData<List<Account>> getAllAccounts() {
+    public LiveData<List<Account>> getAllAccounts() {
         return allAccts;
     }
 

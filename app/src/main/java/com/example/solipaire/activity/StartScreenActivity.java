@@ -1,4 +1,4 @@
-package com.example.solipaire;
+package com.example.solipaire.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.util.Log;
+
+import com.example.solipaire.R;
+import com.example.solipaire.fragment.StartScreenFragment;
 
 public class StartScreenActivity extends AppCompatActivity {
 

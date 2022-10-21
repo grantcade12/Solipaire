@@ -1,4 +1,4 @@
-package com.example.solipaire;
+package com.example.solipaire.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

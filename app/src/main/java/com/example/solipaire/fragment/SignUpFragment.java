@@ -1,4 +1,4 @@
-package com.example.solipaire;
+package com.example.solipaire.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,6 +17,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+
+import com.example.solipaire.R;
+import com.example.solipaire.data.Account;
+import com.example.solipaire.viewmodel.AccountViewModel;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener {
     private EditText usernameEditText;

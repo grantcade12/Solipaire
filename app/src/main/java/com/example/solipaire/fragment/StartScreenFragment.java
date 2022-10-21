@@ -1,4 +1,4 @@
-package com.example.solipaire;
+package com.example.solipaire.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.example.solipaire.R;
 
 public class StartScreenFragment extends Fragment implements View.OnClickListener {
 
