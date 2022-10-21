@@ -1,25 +1,45 @@
 package com.example.solipaire;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private AccountViewModel accountViewModel;
+    private final List<Account> accountList = new CopyOnWriteArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(null,"LoginFragment onCreate() started");
         super.onCreate(savedInstanceState);
         Activity activity = requireActivity();
+        accountViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AccountViewModel.class);
+        accountViewModel.getAllAccounts().observe((LifecycleOwner) activity, userAccounts -> {
+            accountList.clear();
+            accountList.addAll(userAccounts);
+        });
         Log.i(null,"LoginFragment onCreate() complete");
     }
 
@@ -34,6 +54,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         } else {
             v = inflater.inflate(R.layout.fragment_login, container, false);
         }
+        usernameEditText = v.findViewById(R.id.mUserName);
+        passwordEditText = v.findViewById(R.id.mPassword);
 
         final Button loginButton = v.findViewById(R.id.loginButton);
         if (loginButton != null) {
@@ -48,6 +70,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Log.i(null,"LoginFragment onResume() started");
         super.onResume();
         Log.i(null,"LoginFragment onResume() complete");
+        usernameEditText = null;
+        passwordEditText = null;
     }
 
     @Override
@@ -75,7 +99,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         Log.i(null,"LoginFragment onDestroy() started");
         super.onDestroy();
+        final Activity activity = requireActivity();
+        accountViewModel.getAllAccounts().removeObservers((LifecycleOwner) activity);
         Log.i(null,"LoginFragment onDestroy() complete");
+
     }
 
     @Override
@@ -85,13 +112,32 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Log.i(null, "LoginFragment onDestroyView() complete");
     }
 
+    private void logIn() {
+        final String username = usernameEditText.getText().toString();
+        final String password = passwordEditText.getText().toString();
+        Activity activity = requireActivity();
+        Account account = new Account(username, password);
+        if (accountList.contains(account)) {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("name", username);
+            editor.apply();
+            //TODO: Start new activity for game menu
+            activity.finish();
+        } else {
+            FragmentManager manager = getParentFragmentManager();
+            Toast.makeText(activity.getApplicationContext(), "Login Error", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     @Override
     public void onClick(View view) {
         Log.i(null,"LoginFragment onClick() started");
         final Activity activity = requireActivity();
         final int viewId = view.getId();
         if (viewId == R.id.LogInButton){
-            //GO TO LOGIN SCREEN, DO NOTHING FOR NOW
+            logIn();
             Log.i(null,"LoginFragment onClick() LogInButton clicked");
         }
         Log.i(null,"LoginFragment onClick() finished");
