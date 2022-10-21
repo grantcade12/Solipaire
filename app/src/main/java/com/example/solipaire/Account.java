@@ -1,5 +1,6 @@
 package com.example.solipaire;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -24,6 +25,11 @@ public class Account {
 
     public String getPassword() {
         return password;
+    }
+
+    public Account(@NonNull String name, @NonNull String password){
+        this.username = name;
+        this.password = password;
     }
 
     @Override

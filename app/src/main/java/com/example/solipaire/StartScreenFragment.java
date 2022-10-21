@@ -102,9 +102,14 @@ public class StartScreenFragment extends Fragment implements View.OnClickListene
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack("login_fragment")
                     .commit();
-        } else if (viewId == R.id.SignUpButton){
-            //GO TO CREATE ACCOUNT SCREEN, DO NOTHING FOR NOW
+        } else if (viewId == R.id.SignUpButton) {
             Log.i(null,"StartScreenFragment onClick() SignUpButton clicked");
+            FragmentManager fm = getParentFragmentManager();
+            Fragment fragment = new SignUpFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container,fragment)
+                    .addToBackStack("signup_fragment")
+                    .commit();
         }
         Log.i(null,"StartScreenFragment onClick() finished");
     }
