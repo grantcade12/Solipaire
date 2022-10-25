@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.StartScreenActivity">
+
+    <TextView
+        android:id="@+id/LogInTitle"
+        android:layout_width="361dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="29dp"
+        android:fontFamily="@font/kameron_bold"
+        android:text="@string/solipaire"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FF0000"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <Button
+        android:id="@+id/NewGameButton"
+        android:layout_width="354dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="29dp"
+        android:background="#FF0000"
+
+        android:backgroundTint="#FF0000"
+        android:text="@string/new_game"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:iconTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LogInTitle"
+        app:layout_constraintVertical_bias="0.008"
+        app:strokeColor="#FF0000" />
+
+    <Button
+        android:id="@+id/StatsButton"
+        android:layout_width="354dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="29dp"
+        android:background="#FF0000"
+
+        android:backgroundTint="#FF0000"
+        android:text="@string/stats"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:iconTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewGameButton"
+        app:layout_constraintVertical_bias="0.0"
+        app:strokeColor="#FF0000" />
+
+    <Button
+        android:id="@+id/RulesButton"
+        android:layout_width="354dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="29dp"
+
+        android:background="#FF0000"
+        android:backgroundTint="#FF0000"
+        android:text="@string/how_to_play"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:iconTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StatsButton"
+        app:layout_constraintVertical_bias="0.0"
+        app:strokeColor="#FF0000" />
+
+    <Button
+        android:id="@+id/SettingsButton"
+        android:layout_width="354dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="29dp"
+        android:background="#FF0000"
+
+        android:backgroundTint="#FF0000"
+        android:text="@string/settings"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:iconTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RulesButton"
+        app:layout_constraintVertical_bias="0.0"
+        app:strokeColor="#FF0000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

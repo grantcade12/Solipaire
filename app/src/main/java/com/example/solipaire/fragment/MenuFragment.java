@@ -1,0 +1,118 @@
+package com.example.solipaire.fragment;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Surface;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.example.solipaire.R;
+
+public class MenuFragment extends Fragment implements View.OnClickListener {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.i(null,"MenuFragment onCreate() started");
+        super.onCreate(savedInstanceState);
+        Activity activity = requireActivity();
+        Log.i(null,"MenuFragment onCreate() complete");
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        Log.i(null,"MenuFragment onCreateView() started");
+        View v;
+        Activity activity = requireActivity();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+            v = inflater.inflate(R.layout.fragment_menu/*_landscape*/, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_menu, container, false);
+        }
+        final Button createGameButton = v.findViewById(R.id.NewGameButton);
+        if (createGameButton != null) {
+            createGameButton.setOnClickListener(this);
+        }
+
+        final Button statsButton = v.findViewById(R.id.StatsButton);
+        if (statsButton != null) {
+            statsButton.setOnClickListener(this);
+        }
+        final Button rulesButton = v.findViewById(R.id.RulesButton);
+        if (rulesButton != null) {
+            rulesButton.setOnClickListener(this);
+        }
+
+        final Button settingsButton = v.findViewById(R.id.SettingsButton);
+        if (settingsButton != null) {
+            settingsButton.setOnClickListener(this);
+        }
+        Log.i(null,"MenuFragment onCreateView() complete");
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        Log.i(null,"MenuFragment onResume() started");
+        super.onResume();
+        Log.i(null,"MenuFragment onResume() complete");
+    }
+
+    @Override
+    public void onStart() {
+        Log.i(null,"MenuFragment onStart() started");
+        super.onStart();
+        Log.i(null,"MenuFragment onStart() complete");
+    }
+
+    @Override
+    public void onStop() {
+        Log.i(null,"MenuFragment onStop() started");
+        super.onStop();
+        Log.i(null,"MenuFragment onStop() complete");
+    }
+
+    @Override
+    public void onPause() {
+        Log.i(null,"MenuFragment onPause() started");
+        super.onPause();
+        Log.i(null,"MenuFragment onPause() complete");
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i(null,"MenuFragment onDestroy() started");
+        super.onDestroy();
+        Log.i(null,"MenuFragment onDestroy() complete");
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.i(null,"MenuFragment onDestroyView() started");
+        super.onDestroyView();
+        Log.i(null, "MenuFragment onDestroyView() complete");
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.i(null,"MenuFragment onClick() started");
+        final Activity activity = requireActivity();
+        final int viewId = view.getId();
+        if (viewId == R.id.NewGameButton) {
+            Log.i(null,"MenuFragment onClick() NewGameButton clicked");
+        } else if (viewId == R.id.StatsButton) {
+            Log.i(null,"MenuFragment onClick() StatsButton clicked");
+        } else if (viewId == R.id.RulesButton) {
+            Log.i(null,"MenuFragment onClick() HowToPlayButton clicked");
+        } else if (viewId == R.id.SettingsButton) {
+            Log.i(null,"MenuFragment onClick() SettingsButton clicked");
+        }
+        Log.i(null,"MenuFragment onClick() finished");
+    }
+}

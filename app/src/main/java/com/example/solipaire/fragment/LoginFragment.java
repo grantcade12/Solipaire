@@ -1,6 +1,7 @@
 package com.example.solipaire.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.solipaire.R;
+import com.example.solipaire.activity.MenuActivity;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
 
@@ -127,7 +129,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             editor.putString("name", username);
             editor.apply();
             Toast.makeText(activity.getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
-            //TODO: Start new activity for game menu
+            startActivity(new Intent(activity, MenuActivity.class));
             activity.finish();
         } else {
             FragmentManager manager = getParentFragmentManager();
@@ -141,11 +143,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Log.i(null,"LoginFragment onClick() started");
         final Activity activity = requireActivity();
         final int viewId = view.getId();
-        Log.i(null,"" + R.id.LogInButton);
-        //if (viewId == R.id.LogInButton){
+        if (viewId == R.id.loginButton){
             logIn();
             Log.i(null,"LoginFragment onClick() LogInButton clicked");
-        //}
+        }
         Log.i(null,"LoginFragment onClick() finished");
     }
 }

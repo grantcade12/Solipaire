@@ -3,4 +3,8 @@
     <string name="log_in">Log In</string>
     <string name="create_account">Create Account</string>
     <string name="solipaire">Solipaire</string>
+    <string name="new_game">New Game</string>
+    <string name="stats">Statistics</string>
+    <string name="how_to_play">How To Play</string>
+    <string name="settings">Settings</string>
 </resources>
