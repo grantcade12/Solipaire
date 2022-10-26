@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".activity.StartScreenActivity">
 
     <TextView
         android:id="@+id/LogInTitle"
         android:layout_width="361dp"
         android:layout_height="88dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="25dp"
         android:fontFamily="@font/kameron_bold"
@@ -17,38 +19,31 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FF0000"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="60sp" />
 
     <Button
         android:id="@+id/LogInButton"
         android:layout_width="354dp"
         android:layout_height="86dp"
+        android:layout_below="@id/imageView"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="29dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="29dp"
+
         android:layout_marginBottom="18dp"
         android:background="#FF0000"
         android:backgroundTint="#FF0000"
-
         android:text="@string/log_in"
         android:textColor="#000000"
-        android:textSize="48sp"
-        app:iconTint="#FF0000"
-        app:layout_constraintBottom_toTopOf="@+id/SignUpButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:strokeColor="#FF0000" />
+        android:textSize="48sp" />
 
     <Button
         android:id="@+id/SignUpButton"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="354dp"
         android:layout_height="86dp"
+        android:layout_below="@id/LogInButton"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="29dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="29dp"
@@ -57,25 +52,21 @@
         android:backgroundTint="#FF0000"
         android:text="@string/create_account"
         android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogInButton"
-        app:strokeColor="#FF0000" />
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="203dp"
         android:layout_height="196dp"
+        android:layout_below="@id/LogInTitle"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="104dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="44dp"
+        android:contentDescription="SOLIPAIRE LOGO"
         android:src="@mipmap/logo"
-        app:layout_constraintBottom_toTopOf="@+id/LogInButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogInTitle" />
+        app:srcCompat="@mipmap/logo"
+        tools:srcCompat="@mipmap/logo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

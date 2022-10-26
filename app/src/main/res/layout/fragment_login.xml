@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,21 +9,21 @@
         android:id="@+id/passwordTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="260dp"
+        android:layout_below="@id/mUserName"
+        android:layout_alignStart="@id/mUserName"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/kameron_bold"
-        android:text="Password: "
+        android:text="@string/PasswordColon"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#444444"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/LogInTitle"
-        android:layout_width="361dp"
+        android:layout_width="wrap_content"
         android:layout_height="88dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/kameron_bold"
@@ -32,60 +31,55 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FF0000"
-        android:textSize="48sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="48sp" />
 
     <TextView
         android:id="@+id/userNameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="152dp"
+        android:layout_below="@id/LogInTitle"
+        android:layout_alignStart="@id/mUserName"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/kameron_bold"
-        android:text="User Name: "
+        android:text="@string/User_NameColon"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#444444"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/mUserName"
-        android:layout_width="368dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_below="@id/userNameTitle"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="11dp"
-        android:ems="10"
-        android:hint="username"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameTitle"
-        android:autofillHints="" />
+        android:autofillHints=""
+        android:width="368dp"
+        android:hint="@string/username"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/mPassword"
         android:layout_width="368dp"
         android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="11dp"
-        android:ems="10"
-        android:hint="password"
+        android:layout_below="@id/passwordTitle"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTitle" />
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="298dp"
-        android:layout_height="74dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/mPassword"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="200dp"
         android:background="#FF0000"
         android:text="@string/log_in"
         android:textSize="34sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mPassword" />
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
