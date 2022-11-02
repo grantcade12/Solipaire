@@ -1,65 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     tools:context=".activity.StartScreenActivity">
 
-    <TextView
-        android:id="@+id/LogInTitle"
-        android:layout_width="361dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/kameron_bold"
-        android:text="@string/solipaire"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FF0000"
-        android:textSize="60sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="381dp"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/LogInButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="60dp"
-        android:background="#FF0000"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
 
-        android:backgroundTint="#FF0000"
-        android:text="@string/log_in"
-        android:textColor="#000000"
-        android:textSize="48sp"
-        app:iconTint="#FF0000"
-        app:layout_constraintStart_toEndOf="@+id/LogInTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#FF0000" />
+            <TextView
+                android:id="@+id/LogInTitle"
+                android:layout_width="361dp"
+                android:layout_height="88dp"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/kameron_bold"
+                android:text="@string/solipaire"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#FF0000"
+                android:textSize="60sp" />
 
-    <Button
-        android:id="@+id/SignUpButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="75dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/create_account"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/LogInButton"
-        app:strokeColor="#FF0000" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="217dp"
+                android:adjustViewBounds="false"
+                android:src="@mipmap/logo" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="203dp"
-        android:layout_height="196dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="20dp"
-        android:src="@mipmap/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LogInTitle" />
+        </LinearLayout>
+    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/SignUpButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_marginTop="60dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/create_account"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/LogInButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_marginTop="60dp"
+            android:background="#FF0000"
+
+            android:backgroundTint="#FF0000"
+            android:text="@string/log_in"
+            android:textColor="#000000"
+            android:textSize="48sp" />
+    </LinearLayout>
+
+</LinearLayout>

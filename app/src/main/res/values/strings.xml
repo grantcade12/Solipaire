@@ -11,4 +11,6 @@
     <string name="password">password</string>
     <string name="PasswordColon">Password:</string>
     <string name="User_NameColon">User Name:</string>
+    <string name="solipaire_logo">SOLIPAIRE LOGO</string>
+    <string name="solipaire_instructions">Solipaire is a competitive form of Solitaire that is played by 2 people. At the start a traditional Solitaire board will be created and each player will be dealt 7 cards from the draw pile. On a turn a player can either play a card from their hand onto a stack, move cards from one stack to another, remove a card from a stack and place it in the discard pile for that suit, draw a card, or do nothing. Play swaps back and forth between players and the player to empty their hand first wins. If neither player can empty their hand the player with the lowest points wins. Points are totaled by the sum of point values for each card in your hand.</string>
 </resources>

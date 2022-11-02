@@ -64,7 +64,7 @@
         android:layout_marginTop="31dp"
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="44dp"
-        android:contentDescription="SOLIPAIRE LOGO"
+        android:contentDescription="@string/solipaire_logo"
         android:src="@mipmap/logo"
         app:srcCompat="@mipmap/logo"
         tools:srcCompat="@mipmap/logo" />
