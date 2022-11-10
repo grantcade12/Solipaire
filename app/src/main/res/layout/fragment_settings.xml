@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/settingsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/settings"
+                android:textAlignment="center"
+                android:textSize="48sp" />
+
+            <Button
+                android:id="@+id/settings_changeUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_username" />
+
+            <TextView
+                android:id="@+id/settings_changeCardTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_card_theme"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/card_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/red_default"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/card_blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/blue"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <Button
+                    android:id="@+id/card_green"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Green" />
+
+                <Button
+                    android:id="@+id/card_purple"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Purple"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <Button
+                    android:id="@+id/card_black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Black" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/settings_changeTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_table_color"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/table_green"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/green_default"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/table_blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/blue" />
+
+                <Button
+                    android:id="@+id/table_red"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Red" />
+
+                <Button
+                    android:id="@+id/table_purple"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Purple" />
+
+                <Button
+                    android:id="@+id/table_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/white" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/settings_music"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="@string/music"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/settings_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/warning_the_following_options_cannot_be_undone"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/settings_resetStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reset_statistics" />
+
+            <Button
+                android:id="@+id/settings_deleteUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_user" />
+
+            <Button
+                android:id="@+id/settings_resetGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reset_game" />
+
+            <Button
+                android:id="@+id/settings_return"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/return_text" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

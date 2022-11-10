@@ -19,7 +19,7 @@ public class RulesActivity extends AppCompatActivity {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(null,"MenuActivity onCreate() started");
+        Log.i(null,"RulesActivity onCreate() started");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         FragmentManager fm = getSupportFragmentManager();
@@ -30,41 +30,41 @@ public class RulesActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
-        Log.i(null,"MenuActivity onCreate() complete");
+        Log.i(null,"RulesActivity onCreate() complete");
     }
 
     @Override
     public void onResume() {
-        Log.i(null,"MenuActivity onResume() started");
+        Log.i(null,"RulesActivity onResume() started");
         super.onResume();
-        Log.i(null,"MenuActivity onResume() complete");
+        Log.i(null,"RulesActivity onResume() complete");
     }
 
     @Override
     public void onStart() {
-        Log.i(null,"MenuActivity onStart() started");
+        Log.i(null,"RulesActivity onStart() started");
         super.onStart();
-        Log.i(null,"MenuActivity onStart() complete");
+        Log.i(null,"RulesActivity onStart() complete");
     }
 
     @Override
     public void onStop() {
-        Log.i(null,"MenuActivity onStop() started");
+        Log.i(null,"RulesActivity onStop() started");
         super.onStop();
-        Log.i(null,"MenuActivity onStop() complete");
+        Log.i(null,"RulesActivity onStop() complete");
     }
 
     @Override
     public void onPause() {
-        Log.i(null,"MenuActivity onPause() started");
+        Log.i(null,"RulesActivity onPause() started");
         super.onPause();
-        Log.i(null,"MenuActivity onPause() complete");
+        Log.i(null,"RulesActivity onPause() complete");
     }
 
     @Override
     public void onDestroy() {
-        Log.i(null,"MenuActivity onDestroy() started");
+        Log.i(null,"RulesActivity onDestroy() started");
         super.onDestroy();
-        Log.i(null,"MenuActivity onDestroy() complete");
+        Log.i(null,"RulesActivity onDestroy() complete");
     }
 }

@@ -115,6 +115,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         } else if (viewId == R.id.RulesButton) {
             Log.i(null,"MenuFragment onClick() HowToPlayButton clicked");
             startActivity(new Intent(appContext, RulesActivity.class));
+            activity.finish();
         } else if (viewId == R.id.SettingsButton) {
             Log.i(null,"MenuFragment onClick() SettingsButton clicked");
         }
