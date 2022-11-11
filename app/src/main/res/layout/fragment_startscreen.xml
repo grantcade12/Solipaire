@@ -66,7 +66,7 @@
         android:layout_marginBottom="44dp"
         android:contentDescription="@string/solipaire_logo"
         android:src="@mipmap/logo"
-        app:srcCompat="@mipmap/logo"
-        tools:srcCompat="@mipmap/logo" />
+        app:srcCompat="@drawable/solipairelogo"
+        tools:srcCompat="@drawable/solipairelogo" />
 
 </RelativeLayout>

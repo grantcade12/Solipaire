@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -211,8 +212,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         Activity activity = requireActivity();
         Account accountToEdit = accountViewModel.getAccount(LoginFragment.currentUser).getValue();
         accountViewModel.update(new Account(newUsername, accountToEdit.getPassword()));
-
-
+        Toast.makeText(activity.getApplicationContext(), "Username updated to " + newUsername, Toast.LENGTH_SHORT).show();
+        Log.i(null, "Username updated");
     }
 
     private void changeCardBack(CardColor color) {
