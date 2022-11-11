@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.solipaire.R;
 import com.example.solipaire.activity.RulesActivity;
+import com.example.solipaire.activity.SettingsActivity;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
 
@@ -115,9 +116,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         } else if (viewId == R.id.RulesButton) {
             Log.i(null,"MenuFragment onClick() HowToPlayButton clicked");
             startActivity(new Intent(appContext, RulesActivity.class));
-            activity.finish();
+            //activity.finish();
         } else if (viewId == R.id.SettingsButton) {
             Log.i(null,"MenuFragment onClick() SettingsButton clicked");
+            startActivity(new Intent(appContext, SettingsActivity.class));
+            //activity.finish();
         }
         Log.i(null,"MenuFragment onClick() finished");
     }

@@ -34,6 +34,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText usernameEditText;
     private EditText passwordEditText;
+    public static Account currentUser;
     private AccountViewModel accountViewModel;
     private final List<Account> accountList = new CopyOnWriteArrayList<>();
 
@@ -128,6 +129,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (accountList.contains(account)) {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
+            currentUser = account;
             editor.putString("name", username);
             editor.apply();
             Toast.makeText(activity.getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();

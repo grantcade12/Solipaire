@@ -98,7 +98,7 @@ public class RulesFragment extends Fragment implements View.OnClickListener {
         final int viewId = view.getId();
         if (viewId == R.id.ExitRulesButton) {
             Log.i(null,"RulesFragment onClick() ExitRulesButton clicked");
-            startActivity(new Intent(activity, MenuActivity.class));
+            //startActivity(new Intent(activity, MenuActivity.class));
             activity.finish();
         }
         Log.i(null,"RulesFragment onClick() finished");
