@@ -131,6 +131,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             SharedPreferences.Editor editor = settings.edit();
             currentUser = account;
             editor.putString("name", username);
+            editor.putInt("Id", currentUser.getUid());
             editor.apply();
             Toast.makeText(activity.getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(activity, MenuActivity.class));

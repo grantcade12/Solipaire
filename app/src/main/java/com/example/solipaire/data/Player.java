@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.solipaire.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(foreignKeys = {@ForeignKey(
@@ -28,6 +29,21 @@ public class Player {
     @ColumnInfo
     public List<Card> hand;
 
+    public Player(@NonNull String pid, int account_id) {
+        this.pid = pid;
+        this.account_id = account_id;
+        score = 0;
+        hand = new ArrayList<>();
+    }
+
+    public void addCard(Card card) {
+        hand.add(card);
+    }
+
+    public Card removeCard() {
+        return hand.remove(0);
+    }
+
     public String getId() {
         return pid;
     }
@@ -38,5 +54,14 @@ public class Player {
 
     public List<Card> getHand() {
         return hand;
+    }
+
+    @Override
+    public String toString() {
+        String cards = "Player " + pid + " cards:";
+        for (Card card : hand) {
+            cards = cards + card.toString();
+        }
+        return cards;
     }
 }

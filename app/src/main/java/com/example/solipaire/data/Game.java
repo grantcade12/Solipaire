@@ -6,6 +6,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import com.example.solipaire.Board;
+import com.example.solipaire.CardCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,16 @@ public class Game {
         p2id = null;
         board = null;
     }
+
     public Game(int account_id, @NonNull String playerOne, @NonNull String playerTwo) {
         acctid = account_id;
         p1id = playerOne;
         p2id = playerTwo;
-        board = new Board();
+        board = new Board("");
+        Player player1 = new Player(p1id, acctid);
+        Player player2 = new Player(p2id, acctid);
+        CardCreator.generateCards(player1, player2, board);
+
     }
 
     public int getId() {

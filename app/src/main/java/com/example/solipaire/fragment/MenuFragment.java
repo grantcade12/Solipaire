@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.solipaire.R;
+import com.example.solipaire.activity.GameActivity;
 import com.example.solipaire.activity.RulesActivity;
 import com.example.solipaire.activity.SettingsActivity;
 
@@ -111,6 +112,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         final int viewId = view.getId();
         if (viewId == R.id.NewGameButton) {
             Log.i(null,"MenuFragment onClick() NewGameButton clicked");
+            startActivity(new Intent(appContext, GameActivity.class));
         } else if (viewId == R.id.StatsButton) {
             Log.i(null,"MenuFragment onClick() StatsButton clicked");
         } else if (viewId == R.id.RulesButton) {
