@@ -33,8 +33,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private EditText newUsernameText;
     private AccountViewModel accountViewModel;
     private final List<Account> accountList = new CopyOnWriteArrayList<>();
-    enum CardColor {RED, BLUE, GREEN, PURPLE, BLACK}
-    enum TableColor {GREEN, BLUE, RED, PURPLE, WHITE}
+    public enum CardColor {RED, BLUE, GREEN, PURPLE, BLACK}
+    public enum TableColor {GREEN, BLUE, RED, PURPLE, WHITE}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(null,"settingsFragment onCreate() started");
@@ -62,6 +62,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (changeUsernameButton != null) {
             changeUsernameButton.setOnClickListener(this);
         }
+
         final Button cardRedButton = v.findViewById(R.id.card_red);
         if (cardRedButton != null) {
             cardRedButton.setOnClickListener(this);
@@ -208,17 +209,48 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void updateUsername() {
+        //TODO: fix this shit
+        /*
         final String newUsername = newUsernameText.getText().toString();
         Activity activity = requireActivity();
         Account accountToEdit = accountViewModel.getAccount(LoginFragment.currentUser).getValue();
-        accountViewModel.update(new Account(newUsername, accountToEdit.getPassword()));
+        Log.i(null, accountViewModel.toString());
+        Account newAccount = new Account(newUsername, accountToEdit.getPassword());
+        accountViewModel.delete(accountToEdit);
+        accountViewModel.insert(newAccount);
+        LoginFragment.currentUser = newAccount;
         Toast.makeText(activity.getApplicationContext(), "Username updated to " + newUsername, Toast.LENGTH_SHORT).show();
+        */
         Log.i(null, "Username updated");
     }
 
     private void changeCardBack(CardColor color) {
+        switch(color){
+            case RED:
+                break;
+            case BLUE:
+                break;
+            case BLACK:
+                break;
+            case GREEN:
+                break;
+            case PURPLE:
+                break;
+        }
     }
 
     private void changeTableColor(TableColor color) {
+        switch(color){
+            case RED:
+                break;
+            case BLUE:
+                break;
+            case WHITE:
+                break;
+            case GREEN:
+                break;
+            case PURPLE:
+                break;
+        }
     }
 }
