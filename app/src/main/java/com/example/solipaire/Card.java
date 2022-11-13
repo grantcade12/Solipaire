@@ -6,14 +6,14 @@ public class Card {
     private Suit suit;
     private int value;
     private Bitmap cardMap = null;
-    private static Bitmap cardBackMap = CardHelper.getCardBackMap();
+    public static Bitmap cardBackMap = Bitmap.createScaledBitmap(CardHelper.getCardBackMap(), 100, 160, false);
     private boolean flipped;
 
     public Card(Suit suit, int value) {
         flipped = false;
         this.suit = suit;
         this.value = value;
-        cardMap = CardHelper.getBitMap(suit, value);
+        cardMap = Bitmap.createScaledBitmap(CardHelper.getBitMap(suit, value), 100, 160, false);
 
     }
 

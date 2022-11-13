@@ -20,7 +20,7 @@ public class Player {
     @NonNull
     public String pid;
 
-    @ColumnInfo
+    @ColumnInfo(name = "account_id")
     public int account_id;
 
     @ColumnInfo

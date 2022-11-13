@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.solipaire.Board;
 import com.example.solipaire.CardCreator;
+import com.example.solipaire.viewmodel.PlayerViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,21 +36,11 @@ public class Game {
     @ColumnInfo
     public Board board;
 
-    public Game () {
-        acctid = -1;
-        p1id = null;
-        p2id = null;
-        board = null;
-    }
-
-    public Game(int account_id, @NonNull String playerOne, @NonNull String playerTwo) {
-        acctid = account_id;
-        p1id = playerOne;
-        p2id = playerTwo;
+    public Game(int acctid, @NonNull String p1id, @NonNull String p2id) {
+        this.acctid = acctid;
+        this.p1id = p1id;
+        this.p2id = p2id;
         board = new Board("");
-        Player player1 = new Player(p1id, acctid);
-        Player player2 = new Player(p2id, acctid);
-        CardCreator.generateCards(player1, player2, board);
 
     }
 

@@ -129,8 +129,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (accountList.contains(account)) {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
-            currentUser = account;
+            currentUser = accountList.get(accountList.indexOf(account));
             editor.putString("name", username);
+            editor.apply();
             editor.putInt("Id", currentUser.getUid());
             editor.apply();
             Toast.makeText(activity.getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
