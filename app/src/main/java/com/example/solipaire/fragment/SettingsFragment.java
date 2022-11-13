@@ -20,7 +20,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.example.solipaire.CardColor;
 import com.example.solipaire.R;
+import com.example.solipaire.SettingsSingleton;
+import com.example.solipaire.TableColor;
 import com.example.solipaire.activity.RulesActivity;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
@@ -33,8 +36,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private EditText newUsernameText;
     private AccountViewModel accountViewModel;
     private final List<Account> accountList = new CopyOnWriteArrayList<>();
-    public enum CardColor {RED, BLUE, GREEN, PURPLE, BLACK}
-    public enum TableColor {GREEN, BLUE, RED, PURPLE, WHITE}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(null,"settingsFragment onCreate() started");
@@ -204,6 +205,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         } else if (viewId == R.id.table_white) {
             Log.i(null,"settingsFragment onClick() table_white clicked");
             changeTableColor(TableColor.WHITE);
+        } else if (viewId == R.id.settings_return) {
+            activity.finish();
         }
         Log.i(null,"settingsFragment onClick() finished");
     }
@@ -225,32 +228,12 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void changeCardBack(CardColor color) {
-        switch(color){
-            case RED:
-                break;
-            case BLUE:
-                break;
-            case BLACK:
-                break;
-            case GREEN:
-                break;
-            case PURPLE:
-                break;
-        }
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        s.cardColor = color;
     }
 
     private void changeTableColor(TableColor color) {
-        switch(color){
-            case RED:
-                break;
-            case BLUE:
-                break;
-            case WHITE:
-                break;
-            case GREEN:
-                break;
-            case PURPLE:
-                break;
-        }
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        s.tableColor = color;
     }
 }

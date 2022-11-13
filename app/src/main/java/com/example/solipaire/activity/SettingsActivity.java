@@ -1,6 +1,7 @@
 package com.example.solipaire.activity;
 
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.solipaire.R;
+import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.fragment.MenuFragment;
 import com.example.solipaire.fragment.SettingsFragment;
 
@@ -20,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(null,"MenuActivity onCreate() started");
+        SettingsSingleton settings = SettingsSingleton.SettingsSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         FragmentManager fm = getSupportFragmentManager();

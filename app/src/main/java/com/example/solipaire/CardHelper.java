@@ -24,7 +24,19 @@ public class CardHelper {
     }
 
     public static Bitmap getCardBackMap() {
-        return BitmapFactory.decodeResource(res, R.drawable.zcardback);
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        switch (s.cardColor) {
+            case BLUE:
+                return BitmapFactory.decodeResource(res, R.drawable.zcardback);
+            case PURPLE:
+                return BitmapFactory.decodeResource(res, R.drawable.zcardbackpurple);
+            case GREEN:
+                return BitmapFactory.decodeResource(res, R.drawable.zcardbackgreen);
+            case BLACK:
+                return BitmapFactory.decodeResource(res, R.drawable.zcardback2);
+            default:
+                return BitmapFactory.decodeResource(res, R.drawable.zcardbackred);
+        }
     }
 
     public static void setResources(Resources resources) {
