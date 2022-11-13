@@ -5,21 +5,25 @@ import android.graphics.Bitmap;
 public class Card {
     private Suit suit;
     private int value;
+    public static final int CARDWIDTH = 100, CARDHEIGHT = 160;
+    private float xLoc = -1f, yLoc = -1f;
     private Bitmap cardMap = null;
-    public static Bitmap cardBackMap = Bitmap.createScaledBitmap(CardHelper.getCardBackMap(), 100, 160, false);
+    public static Bitmap cardBackMap = Bitmap.createScaledBitmap(CardHelper.getCardBackMap(), CARDWIDTH, CARDHEIGHT, false);
     private boolean flipped;
 
     public Card(Suit suit, int value) {
         flipped = false;
         this.suit = suit;
         this.value = value;
-        cardMap = Bitmap.createScaledBitmap(CardHelper.getBitMap(suit, value), 100, 160, false);
+        cardMap = Bitmap.createScaledBitmap(CardHelper.getBitMap(suit, value), CARDWIDTH, CARDHEIGHT, false);
 
     }
 
     public void flipCard() {
         flipped = true;
     }
+
+    public boolean isFlipped() { return flipped; }
 
     public Bitmap getCardMap() {
         if (flipped) {
@@ -37,6 +41,14 @@ public class Card {
     public int getValue() {
         return value;
     }
+
+    public float getXLoc() { return xLoc; }
+
+    public float getYLoc() { return yLoc; }
+
+    public void setXLoc(float x) { xLoc = x; }
+
+    public void setYLoc(float y) { yLoc = y; }
 
     public String toString() {
         String suit = CardHelper.getStringSuit(this.suit);
