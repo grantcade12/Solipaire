@@ -10,13 +10,17 @@ public class Board {
     public static final int NUMCOLUMNS = 7;
     public static final int NUMROWS = 13;
     public static final int NUMPILES = 4;
-    private Card[][] cardColumns, donePiles;
+    private Card[][] cardColumns;
+    private List<Stack<Card>> donePiles;
     private Stack<Card> drawPile;
 
     public Board(String string) {
         board = string;
         cardColumns = new Card[NUMCOLUMNS][NUMROWS];
-        donePiles = new Card[NUMPILES][NUMROWS];
+        donePiles = new ArrayList<>();
+        for (int i = 0; i < NUMPILES; i++) {
+            donePiles.add(new Stack<>());
+        }
         drawPile = new Stack<>();
     }
 
@@ -39,11 +43,13 @@ public class Board {
         this.drawPile = drawPile;
     }
 
+    public Stack<Card> getDrawPile() { return drawPile; }
+
     public Card[][] getCardColumns() {
         return cardColumns;
     }
 
-    public Card[][] getDonePiles() {
+    public List<Stack<Card>> getDonePiles() {
         return donePiles;
     }
 
@@ -59,7 +65,7 @@ public class Board {
         }
 
         cards = cards + "Done piles: ";
-        for (Card[] donePile : donePiles) {
+        for (Stack<Card> donePile : donePiles) {
             for (Card card : donePile) {
                 if (card != null) {
                     cards = cards + card.toString();

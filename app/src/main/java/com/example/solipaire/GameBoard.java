@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 
 import com.example.solipaire.data.Player;
 
+import java.util.List;
+import java.util.Stack;
+
 public class GameBoard extends View {
 
     private Board board;
@@ -44,10 +47,10 @@ public class GameBoard extends View {
         }
 
         float x = canvasWidth / Board.NUMCOLUMNS;
-
+        float y;
         for (int i = 0; i < Board.NUMCOLUMNS; i++) {
             int j = 0;
-            float y = canvasHeight / 2;
+            y = canvasHeight / 2;
             Card[][] cardColumns = board.getCardColumns();
             while(cardColumns[i][j] != null) {
                 canvas.drawBitmap(cardColumns[i][j].getCardMap(), x, y, paint);
@@ -60,16 +63,48 @@ public class GameBoard extends View {
         x = canvasWidth / Board.NUMCOLUMNS;
         for (int i = 0; i < player1.getHand().size(); i++) {
             Card card = player1.getHand().get(i);
-            float y = canvasHeight + (2 * card.getCardMap().getHeight());
+            y = canvasHeight + (2 * card.getCardMap().getHeight());
             canvas.drawBitmap(card.getCardMap(), x, y, paint);
             x = x + 100;
         }
 
         x = canvasWidth / Board.NUMCOLUMNS;
         for (int i = 0; i < player2.getHand().size(); i++) {
-            float y = 0;
+            y = 0;
             canvas.drawBitmap(Card.cardBackMap, x, y, paint);
             x = x + 100;
         }
+
+        if (!board.getDrawPile().isEmpty()) {
+            Card drawableCard = board.getDrawPile().peek();
+            canvas.drawBitmap(drawableCard.getCardMap(), canvasWidth - 200, canvasHeight/4, paint);
+        }
+
+        List<Stack<Card>> donePiles = board.getDonePiles();
+        x = canvasWidth / Board.NUMCOLUMNS;
+        for (int i = 0; i < board.NUMPILES; i++) {
+            y = canvasHeight/4;
+            Stack<Card> donePile = donePiles.get(i);
+            if (donePile.isEmpty()) {
+                if (i == 0) {
+                    //Change to Heart pile
+                    canvas.drawBitmap(Card.cardBackMap, x, y, paint);
+                } else if (i == 1) {
+                    //Change to Diamond pile
+                    canvas.drawBitmap(Card.cardBackMap, x, y, paint);
+                } else if (i == 2) {
+                    //Change to Spade pile
+                    canvas.drawBitmap(Card.cardBackMap, x, y, paint);
+                } else {
+                    //Change to Club pile
+                    canvas.drawBitmap(Card.cardBackMap, x, y, paint);
+                }
+            } else {
+                canvas.drawBitmap(donePile.peek().getCardMap(), x, y, paint);
+            }
+            x = x + 150;
+        }
+
+
     }
 }
