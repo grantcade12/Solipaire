@@ -23,11 +23,15 @@ import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class SignUpFragment extends Fragment implements View.OnClickListener {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private EditText passwordReEnterEditText;
     private AccountViewModel accountViewModel;
+    private final List<Account> accountList = new CopyOnWriteArrayList<>();
 
 
     @Override
@@ -36,6 +40,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Activity activity = requireActivity();
         accountViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AccountViewModel.class);
+        accountViewModel.getAllAccounts().observe((LifecycleOwner) activity, userAccounts -> {
+            accountList.clear();
+            accountList.addAll(userAccounts);
+        });
         Log.i(null,"SignUpFragment onCreate() complete");
     }
 
@@ -117,11 +125,22 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         Activity activity = requireActivity();
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) && password.equals(confirm)){
             Account account = new Account(username, password);
-            SettingsSingleton s = SettingsSingleton.SettingsSingleton();
-            s.displayName = username;
-            accountViewModel.insert(account);
-            Toast.makeText(activity.getApplicationContext(), "New Account added", Toast.LENGTH_SHORT).show();
-            Log.i(null, "new Account added");
+            boolean repeat = false;
+            for (int i = 0; i < accountList.size();i++){
+                if (accountList.get(i).username.equals(account.username)){
+                    repeat = true;
+                }
+            }
+            if (!repeat){
+                SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+                s.displayName = username;
+                accountViewModel.insert(account);
+                Toast.makeText(activity.getApplicationContext(), "New Account added", Toast.LENGTH_SHORT).show();
+                Log.i(null, "new Account added");
+            } else {
+                Toast.makeText(activity.getApplicationContext(), "User already exists!", Toast.LENGTH_SHORT).show();
+                Log.i(null, "account already exists");
+            }
         } else if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirm)){
             Log.i(null, "missing field");
             Toast.makeText(activity.getApplicationContext(), "Missing field", Toast.LENGTH_SHORT).show();

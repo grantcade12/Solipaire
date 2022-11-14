@@ -249,7 +249,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         SharedPreferences.Editor editor = settings.edit();
         editor.remove("name");
         editor.apply();
-        accountList.clear();
+        for (Account a: accountList) {
+            accountViewModel.delete(a);
+        }
         startActivity(new Intent(activity, StartScreenActivity.class));
         Log.i(null, "All accounts deleted. Exiting app.");
         activity.finish();
