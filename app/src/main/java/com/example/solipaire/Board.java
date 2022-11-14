@@ -10,14 +10,17 @@ public class Board {
     public static final int NUMCOLUMNS = 7;
     public static final int NUMROWS = 13;
     public static final int NUMPILES = 4;
-    private Card[][] cardColumns;
+    private List<List<Card>> cardColumns;
     private List<Stack<Card>> donePiles;
     private Stack<Card> drawPile;
 
     public Board(String string) {
         board = string;
-        cardColumns = new Card[NUMCOLUMNS][NUMROWS];
+        cardColumns = new ArrayList<>();
         donePiles = new ArrayList<>();
+        for (int i = 0; i < NUMCOLUMNS; i++) {
+            cardColumns.add(new ArrayList<>());
+        }
         for (int i = 0; i < NUMPILES; i++) {
             donePiles.add(new Stack<>());
         }
@@ -33,7 +36,7 @@ public class Board {
                 cardIdx = rand.nextInt(deck.size() - 1) + 1;
                 card = deck.remove(cardIdx);
                 if (j == i) card.flipCard();
-                cardColumns[j][i] =  card;
+                cardColumns.get(j).add(card);
             }
         }
         return deck;
@@ -45,7 +48,7 @@ public class Board {
 
     public Stack<Card> getDrawPile() { return drawPile; }
 
-    public Card[][] getCardColumns() {
+    public List<List<Card>> getCardColumns() {
         return cardColumns;
     }
 
@@ -56,7 +59,7 @@ public class Board {
     @Override
     public String toString() {
         String cards = "Board columns: ";
-        for (Card[] cardColumn : cardColumns) {
+        for (List<Card> cardColumn : cardColumns) {
             for (Card card : cardColumn) {
                 if (card != null) {
                     cards = cards + card.toString();

@@ -40,8 +40,8 @@ public class Player {
         hand.add(card);
     }
 
-    public Card removeCard() {
-        return hand.remove(0);
+    public void removeCard(Card card) {
+        hand.remove(card);
     }
 
     public String getId() {
