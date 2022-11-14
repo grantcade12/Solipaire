@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -24,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.solipaire.CardColor;
+import com.example.solipaire.MusicPlayback;
 import com.example.solipaire.R;
 import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.TableColor;
@@ -33,6 +35,7 @@ import com.example.solipaire.activity.StartScreenActivity;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -234,11 +237,22 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void toggleMusic() {
+        Activity activity = requireActivity();
         SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        Context context = requireContext();
+        final String audioResourceName = "android.resource://" + context.getPackageName() +
+                File.separator + R.raw.music;
+        Uri mAudioFileUri = Uri.parse(audioResourceName);
         if (s.music){
             s.music = false;
+            activity.stopService(new Intent(activity.getApplicationContext(), MusicPlayback.class));
+            Log.e(null, "music has stopped");
         } else {
             s.music = true;
+            Intent musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
+            musicIntent.putExtra("URIString", mAudioFileUri.toString());
+            activity.startService(musicIntent);
+            Log.e(null, "Music has started" );
         }
         musicSwitch.setChecked(s.music);
     }

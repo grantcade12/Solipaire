@@ -7,22 +7,25 @@ public class SettingsSingleton {
     public TableColor tableColor;
     public String displayName;
     public int userId;
-    public boolean music;
+    public static boolean music;
+    public String musicUriString;
 
     private SettingsSingleton(){
         cardColor = CardColor.RED;
         tableColor = TableColor.GREEN;
         displayName = "";
         userId = 1;
-        music=true;
+        music = true;
+        musicUriString = "ERROR";
+
     }
 
     public static SettingsSingleton SettingsSingleton() {
         if (instance == null) {
             instance = new SettingsSingleton();
         }
-
         return instance;
     }
+
 
 }

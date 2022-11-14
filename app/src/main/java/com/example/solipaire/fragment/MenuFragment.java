@@ -1,10 +1,14 @@
 package com.example.solipaire.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,21 +18,46 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.solipaire.MusicPlayback;
 import com.example.solipaire.R;
+import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.activity.GameActivity;
 import com.example.solipaire.activity.RulesActivity;
 import com.example.solipaire.activity.SettingsActivity;
 
+import java.io.File;
+
 public class MenuFragment extends Fragment implements View.OnClickListener {
     private TextView usernameDisplay;
+    private Uri mAudioFileUri;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(null,"MenuFragment onCreate() started");
         super.onCreate(savedInstanceState);
-        Activity activity = requireActivity();
+        /*Activity activity = requireActivity();
+        Context context = requireContext();
+        final String audioResourceName = "android.resource://" + context.getPackageName() +
+                File.separator + R.raw.music;
+        mAudioFileUri = Uri.parse(audioResourceName);
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        s.musicUriString = mAudioFileUri.toString();
+        if (s.music){
+            Intent musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
+            musicIntent.putExtra("URIString", mAudioFileUri.toString());
+            activity.startService(musicIntent);
+            Log.e(null, "Music has started" );
+        } else if(!s.music) {
+            activity.stopService(new Intent(activity.getApplicationContext(), MusicPlayback.class));
+        }*/
         Log.i(null,"MenuFragment onCreate() complete");
     }
 
@@ -76,7 +105,20 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         final Activity activity = requireActivity();
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         usernameDisplay.setText(settings.getString("name", "Welcome!"));
-
+        Context context = requireContext();
+        final String audioResourceName = "android.resource://" + context.getPackageName() +
+                File.separator + R.raw.music;
+        mAudioFileUri = Uri.parse(audioResourceName);
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        s.musicUriString = mAudioFileUri.toString();
+        Intent musicIntent= new Intent(activity.getApplicationContext(), MusicPlayback.class);
+        musicIntent.putExtra("URIString", mAudioFileUri.toString());
+        if (s.music){
+            activity.startService(musicIntent);
+            Log.e(null, "Music has started" );
+        } else {
+            activity.stopService(musicIntent);
+        }
         Log.i(null,"MenuFragment onResume() complete");
     }
 
