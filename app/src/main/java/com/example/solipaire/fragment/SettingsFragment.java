@@ -3,7 +3,9 @@ package com.example.solipaire.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,7 +27,9 @@ import com.example.solipaire.CardColor;
 import com.example.solipaire.R;
 import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.TableColor;
+import com.example.solipaire.activity.MenuActivity;
 import com.example.solipaire.activity.RulesActivity;
+import com.example.solipaire.activity.StartScreenActivity;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
 
@@ -34,6 +39,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     private EditText newUsernameText;
+    private Switch musicSwitch;
     private AccountViewModel accountViewModel;
     private final List<Account> accountList = new CopyOnWriteArrayList<>();
     @Override
@@ -42,6 +48,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         Activity activity = requireActivity();
         accountViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(AccountViewModel.class);
+        accountViewModel.getAllAccounts().observe((LifecycleOwner) activity, userAccounts -> {
+            accountList.clear();
+            accountList.addAll(userAccounts);
+        });
+        //Log.i(null, ((Integer)accountList.size()).toString());
         Log.i(null,"settingsFragment onCreate() complete");
     }
 
@@ -56,8 +67,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         } else {
             v = inflater.inflate(R.layout.fragment_settings, container, false);
         }
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         newUsernameText = v.findViewById(R.id.settings_changeUser);
-        newUsernameText.setText(LoginFragment.currentUser.getUsername());
+        newUsernameText.setText(s.displayName);
 
         final Button changeUsernameButton = v.findViewById(R.id.settings_changeUserButton);
         if (changeUsernameButton != null) {
@@ -120,6 +132,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (returnButton != null) {
             returnButton.setOnClickListener(this);
         }
+        musicSwitch = v.findViewById(R.id.settings_music);
+        musicSwitch.setChecked(s.music);
         Log.i(null,"settingsFragment onCreateView() complete");
         return v;
     }
@@ -156,6 +170,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         Log.i(null,"settingsFragment onDestroy() started");
         super.onDestroy();
+        final Activity activity = requireActivity();
+        accountViewModel.getAllAccounts().removeObservers((LifecycleOwner) activity);
         Log.i(null,"settingsFragment onDestroy() complete");
     }
 
@@ -207,33 +223,117 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             changeTableColor(TableColor.WHITE);
         } else if (viewId == R.id.settings_return) {
             activity.finish();
+        } else if (viewId == R.id.settings_deleteUser) {
+            deleteUser();
+        } else if (viewId == R.id.settings_resetGame) {
+            resetGame();
+        } else if (viewId == R.id.settings_music) {
+            toggleMusic();
         }
         Log.i(null,"settingsFragment onClick() finished");
     }
 
+    private void toggleMusic() {
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        if (s.music){
+            s.music = false;
+        } else {
+            s.music = true;
+        }
+        musicSwitch.setChecked(s.music);
+    }
+
+    private void resetGame() {
+        Activity activity = requireActivity();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("name");
+        editor.apply();
+        accountList.clear();
+        startActivity(new Intent(activity, StartScreenActivity.class));
+        Log.i(null, "All accounts deleted. Exiting app.");
+        activity.finish();
+    }
+
+    private void deleteUser() {
+        Activity activity = requireActivity();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("name");
+        editor.apply();
+        int userId = settings.getInt("Id",1);
+        Log.i(null,("accountList size: " + (Integer)accountList.size()).toString());
+        Log.e(null, accountList.toString());
+        int index = 0;
+        for (int i = 0; i< accountList.size(); i++){
+            Account a = accountList.get(i);
+            if (a.uid == userId){
+                index = i;
+            }
+        }
+        Account accountToEdit = accountList.get(index);
+        Log.e(null, accountToEdit.toString());
+        accountViewModel.delete(accountToEdit);
+        Toast.makeText(activity.getApplicationContext(), "User deleted", Toast.LENGTH_SHORT).show();
+        Log.i(null, "User deleted.");
+        startActivity(new Intent(activity, StartScreenActivity.class));
+        activity.finish();
+    }
+
     private void updateUsername() {
-        //TODO: fix this shit
-        /*
         final String newUsername = newUsernameText.getText().toString();
         Activity activity = requireActivity();
-        Account accountToEdit = accountViewModel.getAccount(LoginFragment.currentUser).getValue();
-        Log.i(null, accountViewModel.toString());
-        Account newAccount = new Account(newUsername, accountToEdit.getPassword());
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.remove("name");
+        editor.apply();
+        editor.putString("name", newUsername);
+        editor.apply();
+        int userId = settings.getInt("Id",1);
+        Log.i(null,("accountList size: " + (Integer)accountList.size()).toString());
+        Log.e(null, accountList.toString());
+        int index = 0;
+        for (int i = 0; i< accountList.size(); i++){
+            Account a = accountList.get(i);
+            if (a.uid == userId){
+                index = i;
+            }
+        }
+        Account accountToEdit = accountList.get(index);
+        Account newAccount = new Account(newUsername, accountToEdit.password);
         accountViewModel.delete(accountToEdit);
+        newAccount.uid = accountToEdit.uid;
+        Log.e(null, accountToEdit.toString());
         accountViewModel.insert(newAccount);
-        LoginFragment.currentUser = newAccount;
         Toast.makeText(activity.getApplicationContext(), "Username updated to " + newUsername, Toast.LENGTH_SHORT).show();
-        */
+
         Log.i(null, "Username updated");
     }
 
     private void changeCardBack(CardColor color) {
         SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         s.cardColor = color;
+        Activity activity = requireActivity();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        if (settings.contains("Card color")){
+            editor.remove("Card color");
+        }
+        editor.putString("Card color", color.toString());
+        editor.apply();
+
     }
 
     private void changeTableColor(TableColor color) {
         SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         s.tableColor = color;
+        Activity activity = requireActivity();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        if (settings.contains("Table color")){
+            editor.remove("Table color");
+        }
+        editor.putString("Table color", color.toString());
+        editor.apply();
     }
 }

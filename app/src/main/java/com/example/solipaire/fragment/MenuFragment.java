@@ -3,13 +3,16 @@ package com.example.solipaire.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,7 +23,7 @@ import com.example.solipaire.activity.RulesActivity;
 import com.example.solipaire.activity.SettingsActivity;
 
 public class MenuFragment extends Fragment implements View.OnClickListener {
-
+    private TextView usernameDisplay;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(null,"MenuFragment onCreate() started");
@@ -58,6 +61,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         if (settingsButton != null) {
             settingsButton.setOnClickListener(this);
         }
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        usernameDisplay = v.findViewById(R.id.userDisplay);
+        usernameDisplay.setText(settings.getString("name", "Welcome!"));
         Log.i(null,"MenuFragment onCreateView() complete");
         return v;
     }
@@ -66,6 +73,10 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         Log.i(null,"MenuFragment onResume() started");
         super.onResume();
+        final Activity activity = requireActivity();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        usernameDisplay.setText(settings.getString("name", "Welcome!"));
+
         Log.i(null,"MenuFragment onResume() complete");
     }
 

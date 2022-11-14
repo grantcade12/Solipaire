@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.solipaire.R;
+import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.activity.MenuActivity;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
@@ -49,6 +50,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             accountList.clear();
             accountList.addAll(userAccounts);
         });
+        Log.e(null, ((Integer)accountList.size()).toString());
         Log.i(null,"LoginFragment onCreate() complete");
     }
 
@@ -124,16 +126,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void logIn() {
         final String username = usernameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         Activity activity = requireActivity();
         Account account = new Account(username, password);
+        Log.e(null,((Integer)accountList.size()).toString());
         if (accountList.contains(account)) {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
             currentUser = accountList.get(accountList.indexOf(account));
+            s.displayName = username;
             editor.putString("name", username);
             editor.apply();
             editor.putInt("Id", currentUser.getUid());
             editor.apply();
+            s.userId = currentUser.getUid();
             Toast.makeText(activity.getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(activity, MenuActivity.class));
             activity.finish();

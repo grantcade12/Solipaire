@@ -54,8 +54,8 @@
         android:layout_below="@id/userNameTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
-        android:autofillHints=""
         android:width="368dp"
+        android:autofillHints=""
         android:hint="@string/username"
         android:inputType="textPersonName" />
 

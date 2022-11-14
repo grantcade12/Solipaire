@@ -5,10 +5,16 @@ public class SettingsSingleton {
 
     public CardColor cardColor;
     public TableColor tableColor;
+    public String displayName;
+    public int userId;
+    public boolean music;
 
     private SettingsSingleton(){
         cardColor = CardColor.RED;
         tableColor = TableColor.GREEN;
+        displayName = "";
+        userId = 1;
+        music=true;
     }
 
     public static SettingsSingleton SettingsSingleton() {

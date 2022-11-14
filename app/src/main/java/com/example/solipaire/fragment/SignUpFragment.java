@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.solipaire.R;
+import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.data.Account;
 import com.example.solipaire.viewmodel.AccountViewModel;
 
@@ -116,6 +117,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         Activity activity = requireActivity();
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) && password.equals(confirm)){
             Account account = new Account(username, password);
+            SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+            s.displayName = username;
             accountViewModel.insert(account);
             Toast.makeText(activity.getApplicationContext(), "New Account added", Toast.LENGTH_SHORT).show();
             Log.i(null, "new Account added");

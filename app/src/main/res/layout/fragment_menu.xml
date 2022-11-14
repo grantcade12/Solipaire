@@ -83,4 +83,14 @@
         android:textColor="#000000"
         android:textSize="48sp" />
 
+    <TextView
+        android:id="@+id/userDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SettingsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:text="Welcome!"
+        android:textSize="48dp" />
+
 </RelativeLayout>

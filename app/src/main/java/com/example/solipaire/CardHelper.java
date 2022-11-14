@@ -1,7 +1,10 @@
 package com.example.solipaire;
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 
 public class CardHelper {
     private static Resources res;
