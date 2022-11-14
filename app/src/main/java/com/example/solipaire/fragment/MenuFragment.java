@@ -68,7 +68,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         Activity activity = requireActivity();
         int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
-            v = inflater.inflate(R.layout.fragment_menu/*_landscape*/, container, false);
+            v = inflater.inflate(R.layout.fragment_menu_landscape, container, false);
         } else {
             v = inflater.inflate(R.layout.fragment_menu, container, false);
         }
