@@ -39,6 +39,19 @@ public class CardHelper {
         }
     }
 
+    public static Bitmap getDoneMap(Suit suit) {
+        switch (suit) {
+            case Heart:
+                return BitmapFactory.decodeResource(res, R.drawable.hpile);
+            case Diamond:
+                return BitmapFactory.decodeResource(res, R.drawable.dpile);
+            case Spade:
+                return BitmapFactory.decodeResource(res, R.drawable.spile);
+            default:
+                return BitmapFactory.decodeResource(res, R.drawable.cpile);
+        }
+    }
+
     public static void setResources(Resources resources) {
         if (res == null) {
             res = resources;
@@ -337,10 +350,10 @@ public class CardHelper {
     private static boolean compareValue(Card boardCard, Card handCard, boolean lowerValue) {
         boolean valMatch;
         if (lowerValue) {
-            valMatch = handCard.getValue() < boardCard.getValue();
+            valMatch = handCard.getValue() + 1 == boardCard.getValue();
         }
         else {
-            valMatch = handCard.getValue() > boardCard.getValue();
+            valMatch = handCard.getValue() - 1 == boardCard.getValue();
         }
         return valMatch;
     }

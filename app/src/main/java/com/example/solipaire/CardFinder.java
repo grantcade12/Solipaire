@@ -28,10 +28,11 @@ public class CardFinder {
     public static Card findBoardCard(Board board, float x, float y) {
         Card card = null;
         boolean cardFound = false;
-        Card[][] cardColumns = board.getCardColumns();
+        List<List<Card>> cardColumns = board.getCardColumns();
         for (int i = 0; i < Board.NUMCOLUMNS; i++) {
-            for (int j = 0; j < Board.NUMROWS; j++) {
-                Card columnCard = cardColumns[i][j];
+            List<Card> cardColumn = cardColumns.get(i);
+            for (int j = 0; j < cardColumn.size(); j++) {
+                Card columnCard = cardColumn.get(j);
                 if (columnCard != null && columnCard.isFlipped()) {
                     if (compareTouch(columnCard, x, y) && !cardFound) {
                         card = columnCard;
@@ -80,13 +81,18 @@ public class CardFinder {
     }
 
     public static Card findDrawCard(Stack<Card> drawPile, float x, float y) {
-        Card card = drawPile.peek();
-        if (compareTouch(card, x, y)) {
-            drawPile.pop();
-            drawPile.peek().setXLoc(card.getXLoc());
-            drawPile.peek().setYLoc(card.getYLoc());
-        } else {
-            card = null;
+        Card card = null;
+        if (!drawPile.isEmpty()) {
+            card = drawPile.peek();
+            if (compareTouch(card, x, y)) {
+                drawPile.pop();
+                if (!drawPile.isEmpty()) {
+                    drawPile.peek().setXLoc(card.getXLoc());
+                    drawPile.peek().setYLoc(card.getYLoc());
+                }
+            } else {
+                card = null;
+            }
         }
         return card;
     }

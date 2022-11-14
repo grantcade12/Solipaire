@@ -1,6 +1,7 @@
 package com.example.solipaire;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class Card {
     private Suit suit;
@@ -9,6 +10,10 @@ public class Card {
     private float xLoc = -1f, yLoc = -1f;
     private Bitmap cardMap = null;
     public static Bitmap cardBackMap = Bitmap.createScaledBitmap(CardHelper.getCardBackMap(), CARDWIDTH, CARDHEIGHT, false);
+    public static Bitmap heartMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Heart), CARDWIDTH, CARDHEIGHT, false);
+    public static Bitmap diamondMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Diamond), CARDWIDTH, CARDHEIGHT, false);
+    public static Bitmap spadeMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Spade), CARDWIDTH, CARDHEIGHT, false);
+    public static Bitmap clubMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Club), CARDWIDTH, CARDHEIGHT, false);
     private boolean flipped;
 
     public Card(Suit suit, int value) {
