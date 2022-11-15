@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.solipaire.data.Game;
 import com.example.solipaire.data.GameRepository;
+import com.example.solipaire.data.Stats;
+import com.example.solipaire.data.StatsRepository;
 
 
 public class StatsViewModel extends AndroidViewModel{

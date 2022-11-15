@@ -7,7 +7,7 @@ public class SettingsSingleton {
     public TableColor tableColor;
     public String displayName;
     public int userId;
-    public static boolean music;
+    public boolean music;
     public String musicUriString;
 
     private SettingsSingleton(){

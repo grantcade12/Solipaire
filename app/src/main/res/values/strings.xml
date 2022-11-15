@@ -28,4 +28,13 @@
     <string name="green_default">Green (default)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="statistics">Statistics</string>
+    <string name="games_won">Games Won:</string>
+    <string name="games_played">Games Played:</string>
+    <string name="total_points">Total Points:</string>
+    <string name="player_2">Player 2:</string>
+    <string name="win_loss_ratio">Win/Loss Ratio:</string>
+    <string name="player_1">Player 1:</string>
+    <string name="facebook_app_id">535723011333395</string>
+    <string name="facebook_client_token">273cfd0cd89d1accdc0bee795252a0f0</string>
 </resources>

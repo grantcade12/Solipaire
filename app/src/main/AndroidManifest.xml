@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Solipaire"
         tools:targetApi="31">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
         <activity
             android:name=".activity.StartScreenActivity"
             android:exported="true">
@@ -50,7 +52,17 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.StatsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <service android:enabled="true" android:name=".MusicPlayback"/>
+        <provider android:authorities="com.facebook.app.FacebookContentProvider535723011333395"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

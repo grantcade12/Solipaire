@@ -245,7 +245,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         Uri mAudioFileUri = Uri.parse(audioResourceName);
         if (s.music){
             s.music = false;
-            activity.stopService(new Intent(activity.getApplicationContext(), MusicPlayback.class));
             Log.e(null, "music has stopped");
         } else {
             s.music = true;
