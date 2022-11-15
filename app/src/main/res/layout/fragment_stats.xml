@@ -230,12 +230,13 @@
                     android:text="@string/return_text"
                     android:textSize="34sp" />
 
-                <ImageButton
+                <com.facebook.share.widget.ShareButton
                     android:id="@+id/statsShareBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
+                    android:text="Share"
+                    android:textSize="24sp"
                     app:srcCompat="@drawable/ic_baseline_share_24" />
             </LinearLayout>
 

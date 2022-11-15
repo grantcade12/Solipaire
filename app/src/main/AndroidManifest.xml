@@ -63,6 +63,10 @@
         <provider android:authorities="com.facebook.app.FacebookContentProvider535723011333395"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
+
     </application>
+    <queries>
+    <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
+</queries>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

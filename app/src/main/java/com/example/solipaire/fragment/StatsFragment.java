@@ -2,7 +2,9 @@ package com.example.solipaire.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -19,6 +21,15 @@ import androidx.fragment.app.Fragment;
 
 import com.example.solipaire.R;
 
+
+import com.facebook.CallbackManager;
+import com.facebook.FacebookActivity;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
+
+import java.util.Locale;
+
 public class StatsFragment extends Fragment implements View.OnClickListener {
 
     private TextView p1GamesWon;
@@ -31,11 +42,27 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
     private TextView p2Ratio;
     private TextView p2TotalPoints;
 
+    int gamesPlayed;
+    int p1Wins;
+    int p2Wins;
+    int p1Total;
+    int p2Total;
+    int p1Losses;
+    int p2Losses;
+    String ratio1;
+    String ratio2;
+    ShareLinkContent content;
+
+    CallbackManager callbackManager;
+    ShareDialog shareDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(null,"StatsFragment onCreate() started");
         super.onCreate(savedInstanceState);
         Activity activity = requireActivity();
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
         Log.i(null,"StatsFragment onCreate() complete");
     }
 
@@ -50,15 +77,16 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         } else {
             v = inflater.inflate(R.layout.fragment_stats, container, false);
         }
-
+        content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://osu.instructure.com"))
+                .build();
+        ShareButton shareButton = v.findViewById(R.id.statsShareBtn);
+        shareButton.setShareContent(content);
         final Button exitStatsButton = v.findViewById(R.id.exitStatsButton);
         if (exitStatsButton != null) {
             exitStatsButton.setOnClickListener(this);
         }
-        final ImageButton shareStatsButton = v.findViewById(R.id.statsShareBtn);
-        if (shareStatsButton != null) {
-            shareStatsButton.setOnClickListener(this);
-        }
+
         p1GamesWon = v.findViewById(R.id.p1GamesWon);
         p1GamesPlayed = v.findViewById(R.id.p1GamesPlayed);
         p1Ratio = v.findViewById(R.id.p1Ratio);
@@ -69,20 +97,20 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         p2Ratio = v.findViewById(R.id.p2Ratio);
         p2TotalPoints = v.findViewById(R.id.p2TotalPoints);
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-        int gamesPlayed = settings.getInt("gPlayed",1);
-        int p1Wins = settings.getInt("gWonP1", 1);
-        int p2Wins = settings.getInt("gWonP2", 1);
-        int p1Total = settings.getInt("totalP1", 1);
-        int p2Total = settings.getInt("totalP2", 1);
-        int p1Losses = p1Total - p1Wins;
-        int p2Losses = p2Total - p2Wins;
+        gamesPlayed = settings.getInt("gPlayed",1);
+        p1Wins = settings.getInt("gWonP1", 1);
+        p2Wins = settings.getInt("gWonP2", 1);
+        p1Total = settings.getInt("totalP1", 1);
+        p2Total = settings.getInt("totalP2", 1);
+        p1Losses = p1Total - p1Wins;
+        p2Losses = p2Total - p2Wins;
         p1GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p2GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p1GamesWon.setText(((Integer)p1Wins).toString());
         p2GamesWon.setText(((Integer)p2Wins).toString());
-        String ratio1 = p1Wins + " : " + p1Losses;
+        ratio1 = p1Wins + " : " + p1Losses;
         p1Ratio.setText(ratio1);
-        String ratio2 = p2Wins + " : " + p2Losses;
+        ratio2 = p2Wins + " : " + p2Losses;
         p2Ratio.setText(ratio2);
         p1TotalPoints.setText(((Integer)p1Total).toString());
         p2TotalPoints.setText(((Integer)p1Total).toString());
@@ -97,20 +125,20 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         Activity activity = requireActivity();
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-        int gamesPlayed = settings.getInt("gPlayed",1);
-        int p1Wins = settings.getInt("gWonP1", 1);
-        int p2Wins = settings.getInt("gWonP2", 1);
-        int p1Total = settings.getInt("totalP1", 1);
-        int p2Total = settings.getInt("totalP2", 1);
-        int p1Losses = p1Total - p1Wins;
-        int p2Losses = p2Total - p2Wins;
+        gamesPlayed = settings.getInt("gPlayed",1);
+        p1Wins = settings.getInt("gWonP1", 1);
+        p2Wins = settings.getInt("gWonP2", 1);
+        p1Total = settings.getInt("totalP1", 1);
+        p2Total = settings.getInt("totalP2", 1);
+        p1Losses = p1Total - p1Wins;
+        p2Losses = p2Total - p2Wins;
         p1GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p2GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p1GamesWon.setText(((Integer)p1Wins).toString());
         p2GamesWon.setText(((Integer)p2Wins).toString());
-        String ratio1 = p1Wins + " : " + p1Losses;
+        ratio1 = p1Wins + " : " + p1Losses;
         p1Ratio.setText(ratio1);
-        String ratio2 = p2Wins + " : " + p2Losses;
+        ratio2 = p2Wins + " : " + p2Losses;
         p2Ratio.setText(ratio2);
         p1TotalPoints.setText(((Integer)p1Total).toString());
         p2TotalPoints.setText(((Integer)p1Total).toString());
@@ -164,6 +192,8 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
             activity.finish();
         } else if (viewId == R.id.statsShareBtn) {
             Log.i(null, "StatsFragment onClick() statsShareBtn clicked");
+            ShareDialog.show(activity, content);
+
         }
         Log.i(null,"StatsFragment onClick() finished");
     }

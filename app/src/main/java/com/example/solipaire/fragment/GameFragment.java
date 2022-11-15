@@ -3,6 +3,7 @@ package com.example.solipaire.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -28,6 +29,8 @@ import com.example.solipaire.data.Player;
 import com.example.solipaire.viewmodel.AccountViewModel;
 import com.example.solipaire.viewmodel.GameViewModel;
 import com.example.solipaire.viewmodel.PlayerViewModel;
+
+import java.util.Locale;
 
 public class GameFragment extends Fragment implements View.OnClickListener {
 
@@ -181,4 +184,5 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         return endMessage;
 
     }
+
 }
