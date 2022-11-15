@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,6 +28,8 @@ import com.example.solipaire.R;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookActivity;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 
@@ -53,6 +58,8 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
     String ratio2;
     ShareLinkContent content;
 
+    Bitmap image;
+
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
@@ -61,6 +68,7 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         Log.i(null,"StatsFragment onCreate() started");
         super.onCreate(savedInstanceState);
         Activity activity = requireActivity();
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.solipairelogo);
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
         Log.i(null,"StatsFragment onCreate() complete");
@@ -77,8 +85,11 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         } else {
             v = inflater.inflate(R.layout.fragment_stats, container, false);
         }
-        content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://osu.instructure.com"))
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .build();
+        SharePhotoContent content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
                 .build();
         ShareButton shareButton = v.findViewById(R.id.statsShareBtn);
         shareButton.setShareContent(content);
