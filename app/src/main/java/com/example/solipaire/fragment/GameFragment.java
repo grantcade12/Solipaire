@@ -180,6 +180,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         p2Score = prefs.getInt("totalP2", 0) + p2Score;
         editor.putInt("totalP1", p1Score);
         editor.putInt("totalP2", p2Score);
+        editor.putInt("gPlayed", gamesPlayed);
         editor.apply();
         return endMessage;
 
