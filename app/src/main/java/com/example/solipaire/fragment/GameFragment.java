@@ -1,6 +1,7 @@
 package com.example.solipaire.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -143,5 +144,41 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         Log.i(null,"GameFragment onClick() started");
         Log.i(null,"GameFragment onClick() finished");
+    }
+
+    public void finishGame(int p1Score, int p2Score, String p1Name, String p2Name) {
+        String endMessage = saveResults(p1Score, p2Score, p1Name, p2Name);
+        final Activity activity = requireActivity();
+        new AlertDialog.Builder(activity)
+                .setTitle(endMessage)
+                .setMessage("Player " + p1Name + " Score: " + p1Score  + "\n" + "Player " + p2Name + " Score: " + p2Score)
+                .setNegativeButton("Exit", (dialog, which) -> {
+                    activity.finish();
+                })
+                .show();
+    }
+
+    private String saveResults(int p1Score, int p2Score, String p1Name, String p2Name) {
+        String endMessage = "";
+        SharedPreferences.Editor editor = prefs.edit();
+        if (p1Score < p2Score) {
+            int p1Won = prefs.getInt("gWonP1", 0) + 1;
+            editor.putInt("gWonP1", p1Won);
+            endMessage = "Player " + p1Name + " Wins";
+        } else if (p2Score < p1Score) {
+            int p2Won = prefs.getInt("gWonP2", 0) + 1;
+            editor.putInt("gWonP2", p2Won);
+            endMessage = "Player " + p2Name + " Wins";
+        } else {
+            endMessage = "Tie game";
+        }
+        int gamesPlayed = prefs.getInt("gPlayed", 0) + 1;
+        p1Score = prefs.getInt("totalP1", 0) + p1Score;
+        p2Score = prefs.getInt("totalP2", 0) + p2Score;
+        editor.putInt("totalP1", p1Score);
+        editor.putInt("totalP2", p2Score);
+        editor.apply();
+        return endMessage;
+
     }
 }

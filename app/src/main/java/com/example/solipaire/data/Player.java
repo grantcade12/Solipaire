@@ -49,6 +49,10 @@ public class Player {
     }
 
     public int getScore() {
+        score = 0;
+        for (Card card : hand) {
+            score = score + card.getValue();
+        }
         return score;
     }
 

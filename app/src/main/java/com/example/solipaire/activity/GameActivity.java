@@ -12,6 +12,7 @@ import com.example.solipaire.R;
 import com.example.solipaire.fragment.GameFragment;
 
 public class GameActivity extends AppCompatActivity {
+    Fragment fragment;
 
     protected Fragment createFragment(){
         return new GameFragment();
@@ -22,7 +23,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             fragment = new GameFragment();
             CardHelper.setResources(getResources());
@@ -66,5 +67,9 @@ public class GameActivity extends AppCompatActivity {
         Log.i(null,"GameActivity onDestroy() started");
         super.onDestroy();
         Log.i(null,"GameActivity onDestroy() complete");
+    }
+
+    public GameFragment getActiveFragment() {
+        return (GameFragment) fragment;
     }
 }
