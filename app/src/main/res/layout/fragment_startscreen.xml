@@ -1,72 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".activity.StartScreenActivity">
 
-    <TextView
-        android:id="@+id/LogInTitle"
-        android:layout_width="361dp"
-        android:layout_height="88dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="25dp"
-        android:fontFamily="@font/kameron_bold"
-        android:text="@string/solipaire"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FF0000"
-        android:textSize="60sp" />
 
-    <Button
-        android:id="@+id/LogInButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_below="@id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="29dp"
 
-        android:layout_marginBottom="18dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/log_in"
-        android:textColor="#000000"
-        android:textSize="48sp" />
+        <TextView
+            android:id="@+id/LogInTitle"
+            android:layout_width="361dp"
+            android:layout_height="88dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/kameron_bold"
+            android:text="@string/solipaire"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FF0000"
+            android:textSize="60sp" />
 
-    <Button
-        android:id="@+id/SignUpButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_below="@id/LogInButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="26dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/create_account"
-        android:textColor="#000000"
-        android:textSize="24sp" />
+        <Button
+            android:id="@+id/LogInButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="29dp"
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="203dp"
-        android:layout_height="196dp"
-        android:layout_below="@id/LogInTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="44dp"
-        android:contentDescription="@string/solipaire_logo"
-        android:src="@drawable/solipairelogo"
-        app:srcCompat="@drawable/solipairelogo"
-        tools:srcCompat="@drawable/solipairelogo" />
+            android:layout_marginBottom="18dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/log_in"
+            android:textColor="#000000"
+            android:textSize="48sp" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/SignUpButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/LogInButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="26dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/create_account"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="203dp"
+            android:layout_height="196dp"
+            android:layout_below="@id/LogInTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="31dp"
+            android:layout_marginEnd="104dp"
+            android:layout_marginBottom="44dp"
+            android:contentDescription="@string/solipaire_logo"
+            android:src="@drawable/solipairelogo"
+            app:srcCompat="@drawable/solipairelogo"
+            tools:srcCompat="@drawable/solipairelogo" />
+
+    </RelativeLayout>
+</ScrollView>

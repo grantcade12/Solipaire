@@ -135,7 +135,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         Log.i(null,"MenuFragment onDestroy() started");
-        getActivity().stopService(musicIntent);
         super.onDestroy();
         Log.i(null,"MenuFragment onDestroy() complete");
     }

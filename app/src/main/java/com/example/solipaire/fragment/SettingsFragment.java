@@ -135,6 +135,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (returnButton != null) {
             returnButton.setOnClickListener(this);
         }
+        final Button musicButton = v.findViewById(R.id.settings_musicButton);
+        if (musicButton != null) {
+            musicButton.setOnClickListener(this);
+        }
         musicSwitch = v.findViewById(R.id.settings_music);
         musicSwitch.setChecked(s.music);
         Log.i(null,"settingsFragment onCreateView() complete");
@@ -187,42 +191,42 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Log.i(null,"settingsFragment onClick() started");
+        Log.i(null, "settingsFragment onClick() started");
         final Activity activity = requireActivity();
         final Context appContext = activity.getApplicationContext();
         final int viewId = view.getId();
         if (viewId == R.id.settings_changeUserButton) {
-            Log.i(null,"settingsFragment onClick() changeUserButton clicked");
+            Log.i(null, "settingsFragment onClick() changeUserButton clicked");
             updateUsername();
         } else if (viewId == R.id.card_red) {
-            Log.i(null,"settingsFragment onClick() card_red clicked");
+            Log.i(null, "settingsFragment onClick() card_red clicked");
             changeCardBack(CardColor.RED);
         } else if (viewId == R.id.card_blue) {
-            Log.i(null,"settingsFragment onClick() card_blue clicked");
+            Log.i(null, "settingsFragment onClick() card_blue clicked");
             changeCardBack(CardColor.BLUE);
         } else if (viewId == R.id.card_green) {
-            Log.i(null,"settingsFragment onClick() card_green clicked");
+            Log.i(null, "settingsFragment onClick() card_green clicked");
             changeCardBack(CardColor.GREEN);
         } else if (viewId == R.id.card_purple) {
-            Log.i(null,"settingsFragment onClick() card_purple clicked");
+            Log.i(null, "settingsFragment onClick() card_purple clicked");
             changeCardBack(CardColor.PURPLE);
         } else if (viewId == R.id.card_black) {
-            Log.i(null,"settingsFragment onClick() card_black clicked");
+            Log.i(null, "settingsFragment onClick() card_black clicked");
             changeCardBack(CardColor.BLACK);
         } else if (viewId == R.id.table_green) {
-            Log.i(null,"settingsFragment onClick() table_green clicked");
+            Log.i(null, "settingsFragment onClick() table_green clicked");
             changeTableColor(TableColor.GREEN);
         } else if (viewId == R.id.table_blue) {
-            Log.i(null,"settingsFragment onClick() table_blue clicked");
+            Log.i(null, "settingsFragment onClick() table_blue clicked");
             changeTableColor(TableColor.BLUE);
         } else if (viewId == R.id.table_red) {
-            Log.i(null,"settingsFragment onClick() table_red clicked");
+            Log.i(null, "settingsFragment onClick() table_red clicked");
             changeTableColor(TableColor.RED);
         } else if (viewId == R.id.table_purple) {
-            Log.i(null,"settingsFragment onClick() table_purple clicked");
+            Log.i(null, "settingsFragment onClick() table_purple clicked");
             changeTableColor(TableColor.PURPLE);
         } else if (viewId == R.id.table_white) {
-            Log.i(null,"settingsFragment onClick() table_white clicked");
+            Log.i(null, "settingsFragment onClick() table_white clicked");
             changeTableColor(TableColor.WHITE);
         } else if (viewId == R.id.settings_return) {
             activity.finish();
@@ -230,30 +234,35 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             deleteUser();
         } else if (viewId == R.id.settings_resetGame) {
             resetGame();
-        } else if (viewId == R.id.settings_music) {
-            toggleMusic();
+        }  else if (viewId == R.id.settings_resetStats) {
+            clearStats();
+        } else if (viewId == R.id.settings_musicButton) {
+            toggleMusic(musicSwitch.isChecked());
         }
-        Log.i(null,"settingsFragment onClick() finished");
+        Log.i(null, "settingsFragment onClick() finished");
     }
 
-    private void toggleMusic() {
+
+    
+
+
+    private void toggleMusic(boolean music) {
         Activity activity = requireActivity();
-        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         Context context = requireContext();
+        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         final String audioResourceName = "android.resource://" + context.getPackageName() +
                 File.separator + R.raw.music;
         Uri mAudioFileUri = Uri.parse(audioResourceName);
-        if (s.music){
-            s.music = false;
-            Log.e(null, "music has stopped");
-        } else {
-            s.music = true;
+        if (music) {
             Intent musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
             musicIntent.putExtra("URIString", mAudioFileUri.toString());
             activity.startService(musicIntent);
             Log.e(null, "Music has started" );
+        } else {
+            MusicPlayback.player.stop();
+
         }
-        musicSwitch.setChecked(s.music);
+        s.music = music;
     }
 
     private void resetGame() {
@@ -349,6 +358,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             editor.remove("Table color");
         }
         editor.putString("Table color", color.toString());
+        editor.apply();
+    }
+
+    private void clearStats() {
+        Activity activity = requireActivity();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("gPlayed", 0);
+        editor.putInt("gWonP1", 0);
+        editor.putInt("gWonP2", 0);
+        editor.putInt("totalP1", 0);
+        editor.putInt("totalP2", 0);
         editor.apply();
     }
 }

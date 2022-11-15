@@ -1,96 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.StartScreenActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/LogInTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/kameron_bold"
-        android:text="@string/solipaire"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FF0000"
-        android:textSize="60sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.StartScreenActivity">
 
-    <Button
-        android:id="@+id/NewGameButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_below="@id/LogInTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="32dp"
+        <TextView
+            android:id="@+id/LogInTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/kameron_bold"
+            android:text="@string/solipaire"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FF0000"
+            android:textSize="60sp" />
 
-        android:layout_marginEnd="29dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/new_game"
-        android:textColor="#000000"
-        android:textSize="48sp" />
+        <Button
+            android:id="@+id/NewGameButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/LogInTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="32dp"
 
-    <Button
-        android:id="@+id/StatsButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_below="@id/NewGameButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="44dp"
+            android:layout_marginEnd="29dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/new_game"
+            android:textColor="#000000"
+            android:textSize="48sp" />
 
-        android:layout_marginEnd="29dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/stats"
-        android:textColor="#000000"
-        android:textSize="48sp" />
+        <Button
+            android:id="@+id/StatsButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/NewGameButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="44dp"
 
-    <Button
-        android:id="@+id/RulesButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_below="@id/StatsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="29dp"
+            android:layout_marginEnd="29dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/stats"
+            android:textColor="#000000"
+            android:textSize="48sp" />
 
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="29dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/how_to_play"
-        android:textColor="#000000"
-        android:textSize="48sp" />
+        <Button
+            android:id="@+id/RulesButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/StatsButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="29dp"
 
-    <Button
-        android:id="@+id/SettingsButton"
-        android:layout_width="354dp"
-        android:layout_height="86dp"
-        android:layout_below="@id/RulesButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="44dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="29dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/how_to_play"
+            android:textColor="#000000"
+            android:textSize="48sp" />
 
-        android:layout_marginEnd="29dp"
-        android:background="#FF0000"
-        android:backgroundTint="#FF0000"
-        android:text="@string/settings"
-        android:textColor="#000000"
-        android:textSize="48sp" />
+        <Button
+            android:id="@+id/SettingsButton"
+            android:layout_width="354dp"
+            android:layout_height="86dp"
+            android:layout_below="@id/RulesButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="44dp"
 
-    <TextView
-        android:id="@+id/userDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/SettingsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
-        android:text="Welcome!"
-        android:textSize="48dp" />
+            android:layout_marginEnd="29dp"
+            android:background="#FF0000"
+            android:backgroundTint="#FF0000"
+            android:text="@string/settings"
+            android:textColor="#000000"
+            android:textSize="48sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/userDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/SettingsButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
+            android:text="Welcome!"
+            android:textSize="48dp" />
+
+    </RelativeLayout>
+</ScrollView>

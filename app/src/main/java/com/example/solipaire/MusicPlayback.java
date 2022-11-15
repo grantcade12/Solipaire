@@ -9,7 +9,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class MusicPlayback extends Service {
-    MediaPlayer player;
+    public static MediaPlayer player;
 
     @Override
     public IBinder onBind(Intent intent) {

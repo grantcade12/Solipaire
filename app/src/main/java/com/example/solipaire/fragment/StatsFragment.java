@@ -1,39 +1,39 @@
-package com.example.solipaire.fragment;
+        package com.example.solipaire.fragment;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Surface;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
+        import android.app.Activity;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
+        import android.graphics.drawable.Drawable;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.preference.PreferenceManager;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.Surface;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.Button;
+        import android.widget.ImageButton;
+        import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+        import androidx.annotation.NonNull;
+        import androidx.fragment.app.Fragment;
 
-import com.example.solipaire.R;
+        import com.example.solipaire.R;
 
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookActivity;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
-import com.facebook.share.widget.ShareButton;
-import com.facebook.share.widget.ShareDialog;
+        import com.facebook.CallbackManager;
+        import com.facebook.FacebookActivity;
+        import com.facebook.share.model.ShareLinkContent;
+        import com.facebook.share.model.SharePhoto;
+        import com.facebook.share.model.SharePhotoContent;
+        import com.facebook.share.widget.ShareButton;
+        import com.facebook.share.widget.ShareDialog;
 
-import java.util.Locale;
+        import java.util.Locale;
 
 public class StatsFragment extends Fragment implements View.OnClickListener {
 
@@ -108,13 +108,13 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         p2Ratio = v.findViewById(R.id.p2Ratio);
         p2TotalPoints = v.findViewById(R.id.p2TotalPoints);
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-        gamesPlayed = settings.getInt("gPlayed",1);
-        p1Wins = settings.getInt("gWonP1", 1);
-        p2Wins = settings.getInt("gWonP2", 1);
-        p1Total = settings.getInt("totalP1", 1);
-        p2Total = settings.getInt("totalP2", 1);
-        p1Losses = p1Total - p1Wins;
-        p2Losses = p2Total - p2Wins;
+        gamesPlayed = settings.getInt("gPlayed",0);
+        p1Wins = settings.getInt("gWonP1", 0);
+        p2Wins = settings.getInt("gWonP2", 0);
+        p1Total = settings.getInt("totalP1", 0);
+        p2Total = settings.getInt("totalP2", 0);
+        p1Losses = gamesPlayed - p1Wins;
+        p2Losses = gamesPlayed - p2Wins;
         p1GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p2GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p1GamesWon.setText(((Integer)p1Wins).toString());
@@ -124,7 +124,7 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         ratio2 = p2Wins + " : " + p2Losses;
         p2Ratio.setText(ratio2);
         p1TotalPoints.setText(((Integer)p1Total).toString());
-        p2TotalPoints.setText(((Integer)p1Total).toString());
+        p2TotalPoints.setText(((Integer)p2Total).toString());
 
         Log.i(null,"StatsFragment onCreateView() complete");
         return v;
@@ -136,13 +136,13 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         Activity activity = requireActivity();
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-        gamesPlayed = settings.getInt("gPlayed",1);
-        p1Wins = settings.getInt("gWonP1", 1);
-        p2Wins = settings.getInt("gWonP2", 1);
-        p1Total = settings.getInt("totalP1", 1);
-        p2Total = settings.getInt("totalP2", 1);
-        p1Losses = p1Total - p1Wins;
-        p2Losses = p2Total - p2Wins;
+        gamesPlayed = settings.getInt("gPlayed",0);
+        p1Wins = settings.getInt("gWonP1", 0);
+        p2Wins = settings.getInt("gWonP2", 0);
+        p1Total = settings.getInt("totalP1", 0);
+        p2Total = settings.getInt("totalP2", 0);
+        p1Losses = gamesPlayed - p1Wins;
+        p2Losses = gamesPlayed - p2Wins;
         p1GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p2GamesPlayed.setText(((Integer)gamesPlayed).toString());
         p1GamesWon.setText(((Integer)p1Wins).toString());
@@ -152,7 +152,7 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
         ratio2 = p2Wins + " : " + p2Losses;
         p2Ratio.setText(ratio2);
         p1TotalPoints.setText(((Integer)p1Total).toString());
-        p2TotalPoints.setText(((Integer)p1Total).toString());
+        p2TotalPoints.setText(((Integer)p2Total).toString());
         Log.i(null,"StatsFragment onResume() complete");
     }
 
