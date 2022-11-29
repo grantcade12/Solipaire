@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
@@ -66,7 +67,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     Sensor sensor;
     SensorManager sensorManager;
-    static boolean noAction = true;
 
 
     @Override
@@ -211,6 +211,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         sensorManager.requestTriggerSensor(triggerEventListener, sensor);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        boolean portrait;
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            portrait = false;
+        } else {
+            portrait = true;
+        }
+        gameBoard.updateScreenSize(portrait);
+    }
     private String saveResults(int p1Score, int p2Score, String p1Name, String p2Name) {
         String endMessage = "";
         SharedPreferences.Editor editor = prefs.edit();

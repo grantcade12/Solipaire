@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.solipaire.CardHelper;
 import com.example.solipaire.R;
@@ -67,6 +69,12 @@ public class GameActivity extends AppCompatActivity {
         Log.i(null,"GameActivity onDestroy() started");
         super.onDestroy();
         Log.i(null,"GameActivity onDestroy() complete");
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        fragment.onConfigurationChanged(newConfig);
     }
 
     public GameFragment getActiveFragment() {
