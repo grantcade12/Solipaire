@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -29,14 +30,23 @@ public class GameBoard extends View {
     private Paint paint = new Paint();
     private Paint background = new Paint();
     private GameActivity gameActivity;
-    private int passCounter;
-    public static final float HX = 200f, DX = 350f, SX = 500f, CX = 650f, XOFFSET = 150f, DRAWX = 850f, DELTAX = 100f;
-    public static final float DONEY = 250f, STACKY = 550f, ACTIVEY = 1500f, WAITY = 0f;
+    private int passCounter, maxColumn = 7;
+    private float screenHeight, screenWidth;
+    private boolean portrait = true;
+    public static float drawX, deltaX, stackStartX, stackEndX, hX, dX, cX, sX, dPileX, activeStartX, activeEndX, passStartX, passEndX,
+            drawY, deltaY, stackStartY, stackEndY, doneY, activeY, passStartY, passEndY;
 
     public GameBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         paint.setDither(true);
         gameActivity = (GameActivity) context;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        gameActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenHeight = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
+        if (screenWidth > screenHeight) {
+            portrait = false;
+        }
     }
 
     public void setComponents(Board board, Player player1, Player player2) {
@@ -52,11 +62,12 @@ public class GameBoard extends View {
         super.onDraw(canvas);
 
         if (!gameOver) {
+            //Draw Transition Screen
             if (transitioning) {
                 background.setColor(Color.BLACK);
-                canvas.drawRect(0, 0, 1000, 2000, background);
+                canvas.drawRect(0, 0, screenWidth, screenHeight, background);
                 background.setColor(Color.WHITE);
-                canvas.drawText("Player " + activePlayer.getId() + " Turn", XOFFSET, STACKY, background);
+                canvas.drawText("Player " + activePlayer.getId() + " Turn", 0.3f * screenWidth, 0.4f * screenHeight, background);
             } else {
 
                 SettingsSingleton s = SettingsSingleton.SettingsSingleton();
@@ -79,86 +90,120 @@ public class GameBoard extends View {
                 }
 
 
-                canvas.drawRect(0, 0, 1000, 2000, background);
+                //Draw background
+                canvas.drawRect(0, 0, screenWidth, screenHeight, background);
 
                 background.setColor(Color.BLACK);
-                canvas.drawRect(250, ACTIVEY + Card.CARDHEIGHT * 1.25f, 750, 2000, background);
-                background.setColor(Color.WHITE);
-                background.setTextSize(75);
-                canvas.drawText("Pass", 420, 1780, background);
 
-                float x;
-                float y;
-
-                List<List<Card>> cardColumns = board.getCardColumns();
-                for (int i = 0; i < Board.NUMCOLUMNS; i++) {
-                    y = STACKY;
-                    List<Card> cardColumn = cardColumns.get(i);
-                    for (int j = 0; j < cardColumn.size(); j++) {
-                    /*
-                    if(cardColumn.get(j).getXLoc() > 0f) {
-                        x = cardColumn.get(j).getXLoc();
-                        y = cardColumn.get(j).getYLoc();
-                        canvas.drawBitmap(cardColumn.get(j).getCardMap(), x, y, paint);
-                    } else {
-
-                     */
-                        canvas.drawBitmap(cardColumn.get(j).getCardMap(), XOFFSET + (DELTAX * i), y, paint);
-                        cardColumn.get(j).setXLoc(XOFFSET + (DELTAX * i));
-                        cardColumn.get(j).setYLoc(y);
-                        //}
-                        y = y + (Card.CARDHEIGHT / 3);
-                    }
+                //Draw Waiting Hand
+                deltaX = Card.CARDWIDTH;
+                drawX = GameLayoutHelper.findDrawX(screenWidth, Card.CARDWIDTH, waitingPlayer.getHand().size());
+                if (drawX < 0) {
+                    deltaX = -1 * drawX;
+                    drawX = 0;
                 }
-
-                for (int i = 0; i < activePlayer.getHand().size(); i++) {
-                    Card card = activePlayer.getHand().get(i);
-                    canvas.drawBitmap(card.getCardMap(), XOFFSET + (DELTAX * i), ACTIVEY, paint);
-                    card.setXLoc(XOFFSET + (DELTAX * i));
-                    card.setYLoc(ACTIVEY);
-                }
-
                 for (int i = 0; i < waitingPlayer.getHand().size(); i++) {
-                    canvas.drawBitmap(Card.cardBackMap, XOFFSET + (i * DELTAX), WAITY, paint);
+                    canvas.drawBitmap(Card.cardBackMap, drawX + (i * deltaX), screenHeight - screenHeight, paint);
                 }
 
-                if (!board.getDrawPile().isEmpty()) {
-                    Card drawableCard = board.getDrawPile().peek();
-                    canvas.drawBitmap(drawableCard.getCardMap(), DRAWX, DONEY, paint);
-                    drawableCard.setXLoc(DRAWX);
-                    drawableCard.setYLoc(DONEY);
-                }
-
+                //Draw Done Piles
+                drawY = Card.CARDHEIGHT * 1.5f;
+                doneY = drawY;
+                drawX = 0.1f * screenHeight - (Card.CARDWIDTH / 2);
+                deltaX = (0.8f * screenWidth) / 5;
                 List<Stack<Card>> donePiles = board.getDonePiles();
                 for (int i = 0; i < board.NUMPILES; i++) {
                     Stack<Card> donePile = donePiles.get(i);
                     if (donePile.isEmpty()) {
                         if (i == 0) {
                             //Change to Heart pile
-                            canvas.drawBitmap(Card.heartMap, HX, DONEY, paint);
+                            canvas.drawBitmap(Card.heartMap, drawX, drawY, paint);
+                            hX = drawX;
                         } else if (i == 1) {
                             //Change to Diamond pile
-                            canvas.drawBitmap(Card.diamondMap, DX, DONEY, paint);
+                            canvas.drawBitmap(Card.diamondMap, drawX + (deltaX * i), drawY, paint);
+                            dX = drawX + (deltaX * i);
                         } else if (i == 2) {
                             //Change to Spade pile
-                            canvas.drawBitmap(Card.spadeMap, SX, DONEY, paint);
+                            canvas.drawBitmap(Card.spadeMap, drawX + (deltaX * i), drawY, paint);
+                            sX = drawX + (deltaX * i);
                         } else {
                             //Change to Club pile
-                            canvas.drawBitmap(Card.clubMap, CX, DONEY, paint);
+                            canvas.drawBitmap(Card.clubMap, drawX + (deltaX * i), drawY, paint);
+                            cX = drawX + (deltaX * i);
                         }
                     } else {
                         Card card = donePile.peek();
                         if (i == 0) {
-                            canvas.drawBitmap(card.getCardMap(), HX, DONEY, paint);
+                            canvas.drawBitmap(card.getCardMap(), drawX + (deltaX * i), drawY, paint);
                         } else if (i == 1) {
-                            canvas.drawBitmap(card.getCardMap(), DX, DONEY, paint);
+                            canvas.drawBitmap(card.getCardMap(), drawX + (deltaX * i), drawY, paint);
                         } else if (i == 2) {
-                            canvas.drawBitmap(card.getCardMap(), SX, DONEY, paint);
+                            canvas.drawBitmap(card.getCardMap(), drawX + (deltaX * i), drawY, paint);
                         } else {
-                            canvas.drawBitmap(card.getCardMap(), CX, DONEY, paint);
+                            canvas.drawBitmap(card.getCardMap(), drawX + (deltaX * i), drawY, paint);
                         }
                     }
                 }
+
+                //Draw the drawpile if it exists
+                if (!board.getDrawPile().isEmpty()) {
+                    Card drawableCard = board.getDrawPile().peek();
+                    canvas.drawBitmap(drawableCard.getCardMap(), drawX + (deltaX * 4), drawY, paint);
+                    dPileX = drawX + (deltaX * 4);
+                    drawableCard.setXLoc(drawX + (deltaX * 4));
+                    drawableCard.setYLoc(drawY);
+                }
+
+                //Draw Board
+                drawX = GameLayoutHelper.findDrawX(screenWidth, Card.CARDWIDTH, 7);
+                stackStartX = drawX;
+                deltaX = Card.CARDWIDTH;
+                drawY = drawY + (Card.CARDHEIGHT * 1.2f);
+                stackStartY = drawY;
+                maxColumn = GameLayoutHelper.getMaxColumn(board.getCardColumns());
+                deltaY = ((0.7f * screenHeight) - drawY) / maxColumn;
+                List<List<Card>> cardColumns = board.getCardColumns();
+                for (int i = 0; i < Board.NUMCOLUMNS; i++) {
+                    List<Card> cardColumn = cardColumns.get(i);
+                    for (int j = 0; j < cardColumn.size(); j++) {
+                        canvas.drawBitmap(cardColumn.get(j).getCardMap(), drawX + (deltaX * i), drawY + (deltaY * j), paint);
+                        cardColumn.get(j).setXLoc(drawX + (deltaX * i));
+                        cardColumn.get(j).setYLoc(drawY + (deltaY * j));
+                        if (drawY + (deltaY * j) + Card.CARDHEIGHT > stackEndY) {
+                            stackEndY = drawY + (deltaY * j) + Card.CARDHEIGHT;
+                        }
+                    }
+                    stackEndX = drawX + (deltaX * i) + Card.CARDWIDTH;
+                }
+
+                //Draw Active Player Hand
+                deltaX = Card.CARDWIDTH;
+                drawX = GameLayoutHelper.findDrawX(screenWidth, Card.CARDWIDTH, activePlayer.getHand().size());
+                if (drawX < 0) {
+                    deltaX = -1 * drawX;
+                    drawX = 0;
+                }
+                activeStartX = drawX;
+                drawY = 0.75f * screenHeight;
+                activeY = drawY;
+                for (int i = 0; i < activePlayer.getHand().size(); i++) {
+                    Card card = activePlayer.getHand().get(i);
+                    canvas.drawBitmap(card.getCardMap(), drawX + (deltaX * i), drawY, paint);
+                    card.setXLoc(drawX + (deltaX * i));
+                    card.setYLoc(drawY);
+                    activeEndX = drawX + (deltaX * i);
+                }
+
+                //PassButton
+                passStartX = 0.25f * screenWidth;
+                passStartY = drawY + (Card.CARDHEIGHT * 1.5f);
+                passEndX = 0.75f * screenWidth;
+                passEndY = screenHeight;
+                canvas.drawRect(passStartX, passStartY, passEndX, passEndY, background);
+                background.setColor(Color.WHITE);
+                background.setTextSize(75);
+                canvas.drawText("Pass", screenWidth / 3,0.95f * screenHeight, background);
             }
         }
         else {
@@ -190,11 +235,13 @@ public class GameBoard extends View {
                     float x2 = event.getX();
                     float y2 = event.getY();
                     if (pickedCard != null) {
+                        //Did not pick a draw card
                         if (pickedCard.isFlipped()) {
                             placedCard = CardFinder.findBoardCard(board, x2, y2);
+                            //Placed card was a card on the board
                             if (placedCard != null) {
                                 if (board.getCardColumns().toString().contains(placedCard.toString())) {
-                                    int column = (int) ((placedCard.getXLoc() - XOFFSET) / DELTAX);
+                                    int column = (int) ((placedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                     List<Card> cardColumn = board.getCardColumns().get(column);
                                     if (activePlayer.getHand().contains(pickedCard)) {
                                         moveMade = ActionHandler.placeHandCardOnColumn(pickedCard, cardColumn);
@@ -204,7 +251,7 @@ public class GameBoard extends View {
                                             Toast.makeText(gameActivity.getApplicationContext(), "Invalid Move", Toast.LENGTH_SHORT).show();
                                         }
                                     } else if (board.getCardColumns().toString().contains(pickedCard.toString())) {
-                                        int cardIdx = (int) ((pickedCard.getXLoc() - XOFFSET) / DELTAX);
+                                        int cardIdx = (int) ((pickedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                         List<Card> fromCardColumn = board.getCardColumns().get(cardIdx);
                                         cardIdx = fromCardColumn.indexOf(pickedCard);
                                         moveMade = ActionHandler.placeColumnCardOnColumn(cardIdx, fromCardColumn, cardColumn);
@@ -214,43 +261,57 @@ public class GameBoard extends View {
                                     }
                                 }
                             } else {
-                                if (y2 >= STACKY) {
-                                    int cardIdx = (int) ((x2 - XOFFSET) / DELTAX);
+                                //Placing King card on an empty stack
+                                if (y2 >= stackStartY) {
+                                    int cardIdx = (int) ((x2 - stackStartX) / Card.CARDWIDTH);
                                     if (cardIdx >= 0) {
                                         if (activePlayer.getHand().contains(pickedCard)) {
                                             moveMade = ActionHandler.placeHandCardOnEmptyColumn(activePlayer.getHand(), pickedCard, board.getCardColumns(), cardIdx);
                                         } else {
-                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - XOFFSET) / DELTAX);
+                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                             moveMade = ActionHandler.placeColumnCardOnEmptyColumn(board.getCardColumns().get(fromCardIdx), pickedCard, board.getCardColumns(), cardIdx);
                                         }
                                     }
-                                } else if (y2 < STACKY && y2 >= DONEY) {
-                                    if (x2 >= HX && x2 < DX) {
+                                //Placing card on a done pile
+                                } else if (y2 < stackStartY && y2 >= doneY) {
+                                    //placing card on heart pile
+                                    if (x2 >= hX && x2 < dX) {
+                                        //From player hand
                                         if (activePlayer.getHand().contains(pickedCard)) {
                                             moveMade = ActionHandler.placeHandCardOnDonePile(activePlayer.getHand(), pickedCard, board.getDonePiles().get(0), Suit.Heart);
+                                        //From board
                                         } else {
-                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - XOFFSET) / DELTAX);
+                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                             moveMade = ActionHandler.placeColCardOnDonePile(board.getCardColumns().get(fromCardIdx), pickedCard, board.getDonePiles().get(0), Suit.Heart);
                                         }
-                                    } else if (x2 < SX) {
+                                    //Placing on diamonds pile
+                                    } else if (x2 < sX) {
+                                        //From player hand
                                         if (activePlayer.getHand().contains(pickedCard)) {
                                             moveMade = ActionHandler.placeHandCardOnDonePile(activePlayer.getHand(), pickedCard, board.getDonePiles().get(1), Suit.Diamond);
+                                        //From board
                                         } else {
-                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - XOFFSET) / DELTAX);
+                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                             moveMade = ActionHandler.placeColCardOnDonePile(board.getCardColumns().get(fromCardIdx), pickedCard, board.getDonePiles().get(1), Suit.Diamond);
                                         }
-                                    } else if (x2 < CX) {
+                                    //Placing on spades pile
+                                    } else if (x2 < cX) {
+                                        //From player hand
                                         if (activePlayer.getHand().contains(pickedCard)) {
                                             moveMade = ActionHandler.placeHandCardOnDonePile(activePlayer.getHand(), pickedCard, board.getDonePiles().get(2), Suit.Spade);
+                                        //From board
                                         } else {
-                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - XOFFSET) / DELTAX);
+                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                             moveMade = ActionHandler.placeColCardOnDonePile(board.getCardColumns().get(fromCardIdx), pickedCard, board.getDonePiles().get(2), Suit.Spade);
                                         }
-                                    } else if (x2 < CX + XOFFSET) {
+                                    //Placing on clubs pile
+                                    } else if (x2 < cX + Card.CARDWIDTH) {
+                                        //From player hand
                                         if (activePlayer.getHand().contains(pickedCard)) {
                                             moveMade = ActionHandler.placeHandCardOnDonePile(activePlayer.getHand(), pickedCard, board.getDonePiles().get(3), Suit.Club);
+                                        //From board
                                         } else {
-                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - XOFFSET) / DELTAX);
+                                            int fromCardIdx = (int) ((pickedCard.getXLoc() - stackStartX) / Card.CARDWIDTH);
                                             moveMade = ActionHandler.placeColCardOnDonePile(board.getCardColumns().get(fromCardIdx), pickedCard, board.getDonePiles().get(3), Suit.Club);
                                         }
                                     }
@@ -264,12 +325,15 @@ public class GameBoard extends View {
                             activePlayer.addCard(pickedCard);
                             moveMade = true;
                         }
+                        //Check to reset pass counter
                         if (moveMade) {
                             passCounter = 0;
                         }
                     }
+
+                    //Check if pass has been clicked
                     else {
-                        if (x2 <= 750 && x2 >= 250 && y2 <= 2000 && y2 >= ACTIVEY + Card.CARDHEIGHT * 1.25f) {
+                        if (x2 <= passEndX && x2 >= passStartX && y2 <= passEndY && y2 >= passStartY) {
                             if (!board.getDrawPile().isEmpty()) {
                                 Card card = board.getDrawPile().pop();
                                 card.flipCard();
