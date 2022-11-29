@@ -21,6 +21,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.example.solipaire.PasswordHasher;
 import com.example.solipaire.R;
 import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.activity.MenuActivity;
@@ -126,8 +127,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void logIn() {
         final String username = usernameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
+        PasswordHasher hasher = new PasswordHasher();
+        final String HashedPassword = hasher.HashPassword(password);
         Activity activity = requireActivity();
-        Account account = new Account(username, password);
+        Account account = new Account(username, HashedPassword);
         Log.e(null,((Integer)accountList.size()).toString());
         if (accountList.contains(account)) {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());

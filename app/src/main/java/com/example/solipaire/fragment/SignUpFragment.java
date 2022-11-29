@@ -20,6 +20,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.example.solipaire.PasswordHasher;
 import com.example.solipaire.R;
 import com.example.solipaire.SettingsSingleton;
 import com.example.solipaire.data.Account;
@@ -124,9 +125,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         final String username = usernameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
         final String confirm = passwordReEnterEditText.getText().toString();
+        PasswordHasher hasher = new PasswordHasher();
         Activity activity = requireActivity();
+        String HashedPassword  = hasher.HashPassword(password);
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password) && password.equals(confirm)){
-            Account account = new Account(username, password);
+            Account account = new Account(username, HashedPassword);
             boolean repeat = false;
             for (int i = 0; i < accountList.size();i++){
                 if (accountList.get(i).username.equals(account.username)){
