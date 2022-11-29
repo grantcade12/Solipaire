@@ -70,9 +70,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         } else {
             v = inflater.inflate(R.layout.fragment_settings, container, false);
         }
-        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         newUsernameText = v.findViewById(R.id.settings_changeUser);
-        newUsernameText.setText(s.displayName);
+        newUsernameText.setText(settings.getString("displayName", "user"));
 
         final Button changeUsernameButton = v.findViewById(R.id.settings_changeUserButton);
         if (changeUsernameButton != null) {
@@ -140,7 +140,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             musicButton.setOnClickListener(this);
         }
         musicSwitch = v.findViewById(R.id.settings_music);
-        musicSwitch.setChecked(s.music);
+        musicSwitch.setChecked(settings.getBoolean("musicBool", false));
         Log.i(null,"settingsFragment onCreateView() complete");
         return v;
     }
@@ -249,7 +249,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     private void toggleMusic(boolean music) {
         Activity activity = requireActivity();
         Context context = requireContext();
-        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         final String audioResourceName = "android.resource://" + context.getPackageName() +
                 File.separator + R.raw.music;
         Uri mAudioFileUri = Uri.parse(audioResourceName);
@@ -262,7 +261,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             MusicPlayback.player.stop();
 
         }
-        s.music = music;
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("musicBool",music);
     }
 
     private void resetGame() {

@@ -49,9 +49,12 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         final String audioResourceName = "android.resource://" + context.getPackageName() +
                 File.separator + R.raw.music;
         Uri mAudioFileUri = Uri.parse(audioResourceName);
-        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
-        s.musicUriString = mAudioFileUri.toString();
-        if (s.music){
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("musicUriString", mAudioFileUri.toString());
+        editor.apply();
+        boolean musicBool = settings.getBoolean("musicBool", false);
+        if (musicBool){
             musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
             musicIntent.putExtra("URIString", mAudioFileUri.toString());
             activity.startService(musicIntent);
@@ -104,8 +107,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         final Activity activity = requireActivity();
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         usernameDisplay.setText(settings.getString("name", "Welcome!"));
-        SettingsSingleton s = SettingsSingleton.SettingsSingleton();
-        if (!s.music){
+        boolean musicBool = settings.getBoolean("musicBool", false);
+        if (musicBool){
             activity.stopService(musicIntent);
         }
         Log.i(null,"MenuFragment onResume() complete");

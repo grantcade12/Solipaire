@@ -92,6 +92,9 @@ public class StatsFragment extends Fragment implements View.OnClickListener {
                 .addPhoto(photo)
                 .build();
         ShareButton shareButton = v.findViewById(R.id.statsShareBtn);
+        /*if (shareButton != null) {
+            shareButton.setOnClickListener(this);
+        }*/
         shareButton.setShareContent(content);
         final Button exitStatsButton = v.findViewById(R.id.exitStatsButton);
         if (exitStatsButton != null) {

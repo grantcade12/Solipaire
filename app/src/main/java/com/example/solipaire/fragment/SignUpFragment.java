@@ -1,7 +1,9 @@
 package com.example.solipaire.fragment;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -132,8 +134,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 }
             }
             if (!repeat){
-                SettingsSingleton s = SettingsSingleton.SettingsSingleton();
-                s.displayName = username;
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("displayName", username);
+                editor.apply();
                 accountViewModel.insert(account);
                 Toast.makeText(activity.getApplicationContext(), "New Account added", Toast.LENGTH_SHORT).show();
                 Log.i(null, "new Account added");

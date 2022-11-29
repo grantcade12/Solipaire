@@ -22,7 +22,6 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(null,"MenuActivity onCreate() started");
-        SettingsSingleton settings = SettingsSingleton.SettingsSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         FragmentManager fm = getSupportFragmentManager();

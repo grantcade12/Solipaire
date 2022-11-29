@@ -234,6 +234,8 @@
                     android:id="@+id/statsShareBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_weight="1"
                     android:text="Share"
                     android:textSize="24sp"

@@ -13,10 +13,6 @@ public class SettingsSingleton {
     private SettingsSingleton(){
         cardColor = CardColor.RED;
         tableColor = TableColor.GREEN;
-        displayName = "";
-        userId = 1;
-        music = true;
-        musicUriString = "ERROR";
 
     }
 
