@@ -15,6 +15,7 @@ public class Card {
     public static Bitmap spadeMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Spade), CARDWIDTH, CARDHEIGHT, false);
     public static Bitmap clubMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Club), CARDWIDTH, CARDHEIGHT, false);
     private boolean flipped;
+    private static CardColor cardBack = SettingsSingleton.SettingsSingleton().cardColor;
 
     public Card(Suit suit, int value) {
         flipped = false;
@@ -35,6 +36,10 @@ public class Card {
             return cardMap;
         }
         else {
+            if (SettingsSingleton.SettingsSingleton().cardColor != cardBack) {
+                cardBackMap = Bitmap.createScaledBitmap(CardHelper.getCardBackMap(), CARDWIDTH, CARDHEIGHT, false);
+                cardBack = SettingsSingleton.SettingsSingleton().cardColor;
+            }
             return cardBackMap;
         }
     }
