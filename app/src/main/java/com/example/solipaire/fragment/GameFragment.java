@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.hardware.TriggerEvent;
+import android.hardware.TriggerEventListener;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,11 +25,13 @@ import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.solipaire.CardCreator;
 import com.example.solipaire.GameBoard;
 import com.example.solipaire.GameView;
 import com.example.solipaire.R;
+import com.example.solipaire.activity.GameActivity;
 import com.example.solipaire.data.Game;
 import com.example.solipaire.data.Player;
 import com.example.solipaire.viewmodel.AccountViewModel;
@@ -58,6 +64,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     CallbackManager callbackManager;
     ShareDialog shareDialog;
 
+    Sensor sensor;
+    SensorManager sensorManager;
+    static boolean noAction = true;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +81,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         playerViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(PlayerViewModel.class);
         gameViewModel = new ViewModelProvider((ViewModelStoreOwner) activity).get(GameViewModel.class);
         prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
         Log.i(null,"GameFragment onCreate() complete");
     }
 
@@ -179,7 +191,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         final Activity activity = requireActivity();
         new AlertDialog.Builder(activity)
                 .setTitle(endMessage)
-                .setMessage("Player " + p1Name + " Score: " + p1Score  + "\n" + "Player " + p2Name + " Score: " + p2Score)
+                .setMessage("Player " + p1Name + " Score: " + p1Score + "\n" + "Player " + p2Name + " Score: " + p2Score)
                 .setNeutralButton("Share", (dialog, which) -> {
                     ShareDialog.show(activity, content);
                 })
@@ -187,6 +199,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                     activity.finish();
                 })
                 .show();
+
+        TriggerEventListener triggerEventListener = new TriggerEventListener() {
+            @Override
+            public void onTrigger(TriggerEvent event) {
+                Toast.makeText(activity.getApplicationContext(), "Starting new game", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(activity.getApplicationContext(), GameActivity.class));
+            }
+        };
+
+        sensorManager.requestTriggerSensor(triggerEventListener, sensor);
     }
 
     private String saveResults(int p1Score, int p2Score, String p1Name, String p2Name) {
