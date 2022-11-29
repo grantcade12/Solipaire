@@ -108,7 +108,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         usernameDisplay.setText(settings.getString("name", "Welcome!"));
         boolean musicBool = settings.getBoolean("musicBool", false);
-        if (musicBool){
+        if (!musicBool){
             activity.stopService(musicIntent);
         }
         Log.i(null,"MenuFragment onResume() complete");

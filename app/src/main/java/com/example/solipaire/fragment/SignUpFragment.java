@@ -136,7 +136,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             if (!repeat){
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putString("displayName", username);
+                editor.putString("name", username);
                 editor.apply();
                 accountViewModel.insert(account);
                 Toast.makeText(activity.getApplicationContext(), "New Account added", Toast.LENGTH_SHORT).show();
