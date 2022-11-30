@@ -8,9 +8,7 @@
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".activity.StartScreenActivity">
-
 
 
         <TextView
@@ -24,7 +22,7 @@
             android:text="@string/solipaire"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FF0000"
+
             android:textSize="60sp" />
 
         <Button
@@ -39,7 +37,6 @@
 
             android:layout_marginBottom="18dp"
             android:background="#FF0000"
-            android:backgroundTint="#FF0000"
             android:text="@string/log_in"
             android:textColor="#000000"
             android:textSize="48sp" />
@@ -55,7 +52,6 @@
             android:layout_marginEnd="29dp"
             android:layout_marginBottom="26dp"
             android:background="#FF0000"
-            android:backgroundTint="#FF0000"
             android:text="@string/create_account"
             android:textColor="#000000"
             android:textSize="24sp" />

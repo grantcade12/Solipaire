@@ -16,7 +16,7 @@
         android:text="@string/PasswordColon"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#444444"
+
         android:textSize="24sp" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:text="@string/log_in"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FF0000"
+
         android:textSize="48sp" />
 
     <TextView
@@ -44,7 +44,7 @@
         android:text="@string/User_NameColon"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#444444"
+
         android:textSize="24sp" />
 
     <EditText
@@ -78,6 +78,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="200dp"
         android:background="#FF0000"
+        android:textColor="@color/black"
         android:text="@string/log_in"
         android:textSize="34sp"
         tools:ignore="DuplicateSpeakableTextCheck" />
