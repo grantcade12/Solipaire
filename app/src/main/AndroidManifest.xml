@@ -61,12 +61,13 @@
             </intent-filter>
         </activity>
         <service android:enabled="true" android:name=".MusicPlayback"/>
-
-    </application>
-    <queries>
         <provider android:authorities="com.facebook.app.FacebookContentProvider535723011333395"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
+    </application>
+
+    <queries>
+
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider" /> <!-- allows app to access Facebook app features -->
         <provider android:authorities="com.facebook.orca.provider.PlatformProvider" /> <!-- allows sharing to Messenger app -->
     </queries>
