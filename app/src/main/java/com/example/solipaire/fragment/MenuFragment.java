@@ -54,9 +54,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         editor.putString("musicUriString", mAudioFileUri.toString());
         editor.apply();
         boolean musicBool = settings.getBoolean("musicBool", false);
+        musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
+        musicIntent.putExtra("URIString", mAudioFileUri.toString());
         if (musicBool){
-            musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
-            musicIntent.putExtra("URIString", mAudioFileUri.toString());
             activity.startService(musicIntent);
             Log.e(null, "Music has started" );
         }

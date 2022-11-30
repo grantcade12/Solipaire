@@ -104,4 +104,25 @@ public class CardFinder {
         }
         return isMatch;
     }
+
+    public static int findCardInColumn(List<List<Card>> cardColumns, Card targetCard) {
+        boolean found = false;
+        int cardColumnIdx = 0;
+        while (!found && cardColumnIdx < cardColumns.size()) {
+            List<Card> cardColumn = cardColumns.get(cardColumnIdx);
+            for (Card card : cardColumn) {
+                if (!found) {
+                    if (targetCard.equals(card)) {
+                        found = true;
+                    }
+                }
+            }
+
+            if (!found) {
+                cardColumnIdx++;
+            }
+        }
+
+        return cardColumnIdx;
+    }
 }

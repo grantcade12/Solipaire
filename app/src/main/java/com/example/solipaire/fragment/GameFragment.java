@@ -213,6 +213,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         boolean portrait;
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
