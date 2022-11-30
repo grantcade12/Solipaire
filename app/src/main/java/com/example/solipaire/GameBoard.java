@@ -173,7 +173,7 @@ public class GameBoard extends View {
                                 }
                             } else {
                                 //Placing King card on an empty stack
-                                if (y2 >= stackStartY && x2 >= stackStartX) {
+                                if (y2 >= stackStartY && x2 >= stackStartX && x2 <= stackEndX) {
                                     int cardIdx = (int) ((x2 - stackStartX) / Card.CARDWIDTH);
                                     if (cardIdx >= 0) {
                                         if (activePlayer.getHand().contains(pickedCard)) {

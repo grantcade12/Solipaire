@@ -11,8 +11,8 @@ import java.util.Random;
 import java.util.Stack;
 
 public class CardCreator {
-    public static void generateCards(Player p1, Player p2, Board board) {
-        List<Card> deck = createDeck();
+    public static void distributeCards(List<Card> deck, Player p1, Player p2, Board board) {
+        //List<Card> deck = createDeck();
         deck = board.createBoard(deck);
         Stack<Card> drawPile = dealStartingHands(p1, p2, deck);
         Bitmap bitmap = drawPile.peek().getCardMap();

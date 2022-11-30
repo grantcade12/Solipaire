@@ -28,7 +28,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.solipaire.Card;
 import com.example.solipaire.CardCreator;
+import com.example.solipaire.Deck;
 import com.example.solipaire.GameBoard;
 import com.example.solipaire.GameView;
 import com.example.solipaire.R;
@@ -45,6 +47,8 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class GameFragment extends Fragment implements View.OnClickListener {
@@ -64,6 +68,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     CallbackManager callbackManager;
     ShareDialog shareDialog;
+    ShareButton shareButton;
 
     Sensor sensor;
     SensorManager sensorManager;
@@ -97,14 +102,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         } else {
             v = inflater.inflate(R.layout.fragment_game, container, false);
         }
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(image)
-                .build();
-        content = new SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build();
-        ShareButton shareButton = v.findViewById(R.id.statsShareBtn);
-        shareButton.setShareContent(content);
 
         createNewGame(v);
 
@@ -114,16 +111,20 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private void createNewGame(View v) {
         gameBoard = v.findViewById(R.id.GameBoard);
+
+        shareButton = v.findViewById(R.id.statsShareBtn);
+
         p1id = "1";
         p2id = "2";
         int id = 0;
+        List<Card> deck = new ArrayList<>(Deck.getCarddeck());
         game = new Game(prefs.getInt("Id", id), p1id, p2id);
         Player player1 = new Player(p1id, prefs.getInt("Id", id));
         Player player2 = new Player(p2id, prefs.getInt("Id", id));
-        gameViewModel.insert(game);
-        playerViewModel.insert(player1);
-        playerViewModel.insert(player2);
-        CardCreator.generateCards(player1, player2, game.getBoard());
+        //gameViewModel.insert(game);
+        //playerViewModel.insert(player1);
+        //playerViewModel.insert(player2);
+        CardCreator.distributeCards(deck, player1, player2, game.getBoard());
         gameBoard.setComponents(game.getBoard(), player1, player2);
         gameView = new GameView();
         gameView.setGameViewComponents(gameBoard);
@@ -189,6 +190,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     public void finishGame(int p1Score, int p2Score, String p1Name, String p2Name) {
         String endMessage = saveResults(p1Score, p2Score, p1Name, p2Name);
         final Activity activity = requireActivity();
+        SharePhoto photo = new SharePhoto.Builder()
+                .setBitmap(image)
+                .build();
+        content = new SharePhotoContent.Builder()
+                .addPhoto(photo)
+                .build();
+        ;
+        shareButton.setShareContent(content);
+
         new AlertDialog.Builder(activity)
                 .setTitle(endMessage)
                 .setMessage("Player " + p1Name + " Score: " + p1Score + "\n" + "Player " + p2Name + " Score: " + p2Score)

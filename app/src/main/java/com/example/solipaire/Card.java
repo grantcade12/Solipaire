@@ -6,14 +6,14 @@ import android.graphics.BitmapFactory;
 public class Card {
     private Suit suit;
     private int value;
-    public static final int CARDWIDTH = 100, CARDHEIGHT = 160;
     private float xLoc = -1f, yLoc = -1f;
     private Bitmap cardMap = null;
-    public static Bitmap cardBackMap = Bitmap.createScaledBitmap(CardHelper.getCardBackMap(), CARDWIDTH, CARDHEIGHT, false);
-    public static Bitmap heartMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Heart), CARDWIDTH, CARDHEIGHT, false);
-    public static Bitmap diamondMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Diamond), CARDWIDTH, CARDHEIGHT, false);
-    public static Bitmap spadeMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Spade), CARDWIDTH, CARDHEIGHT, false);
-    public static Bitmap clubMap = Bitmap.createScaledBitmap(CardHelper.getDoneMap(Suit.Club), CARDWIDTH, CARDHEIGHT, false);
+    public static Bitmap cardBackMap = CardHelper.getCardBackMap();
+    public static Bitmap heartMap = CardHelper.getDoneMap(Suit.Heart);
+    public static Bitmap diamondMap = CardHelper.getDoneMap(Suit.Diamond);
+    public static Bitmap spadeMap = CardHelper.getDoneMap(Suit.Spade);
+    public static Bitmap clubMap = CardHelper.getDoneMap(Suit.Club);
+    public static final int CARDWIDTH = cardBackMap.getWidth(), CARDHEIGHT = cardBackMap.getHeight();
     private boolean flipped;
     private static CardColor cardBack = SettingsSingleton.SettingsSingleton().cardColor;
 
@@ -21,12 +21,11 @@ public class Card {
         flipped = false;
         this.suit = suit;
         this.value = value;
-        cardMap = Bitmap.createScaledBitmap(CardHelper.getBitMap(suit, value), CARDWIDTH, CARDHEIGHT, false);
-
+        cardMap = CardHelper.getBitMap(suit, value);
     }
 
     public void flipCard() {
-        flipped = true;
+        flipped = !flipped;
     }
 
     public boolean isFlipped() { return flipped; }

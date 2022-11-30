@@ -27,28 +27,28 @@ public class CardHelper {
         SettingsSingleton s = SettingsSingleton.SettingsSingleton();
         switch (s.cardColor) {
             case BLUE:
-                return BitmapFactory.decodeResource(res, R.drawable.zcardback);
+                return BitmapFactory.decodeResource(res, R.mipmap.zcardback);
             case PURPLE:
-                return BitmapFactory.decodeResource(res, R.drawable.zcardbackpurple);
+                return BitmapFactory.decodeResource(res, R.mipmap.zcardbackpurple);
             case GREEN:
-                return BitmapFactory.decodeResource(res, R.drawable.zcardbackgreen);
+                return BitmapFactory.decodeResource(res, R.mipmap.zcardbackgreen);
             case BLACK:
-                return BitmapFactory.decodeResource(res, R.drawable.zcardback2);
+                return BitmapFactory.decodeResource(res, R.mipmap.zcardback2);
             default:
-                return BitmapFactory.decodeResource(res, R.drawable.zcardbackred);
+                return BitmapFactory.decodeResource(res, R.mipmap.zcardbackred);
         }
     }
 
     public static Bitmap getDoneMap(Suit suit) {
         switch (suit) {
             case Heart:
-                return BitmapFactory.decodeResource(res, R.drawable.hpile);
+                return BitmapFactory.decodeResource(res, R.mipmap.hpile);
             case Diamond:
-                return BitmapFactory.decodeResource(res, R.drawable.dpile);
+                return BitmapFactory.decodeResource(res, R.mipmap.dpile);
             case Spade:
-                return BitmapFactory.decodeResource(res, R.drawable.spile);
+                return BitmapFactory.decodeResource(res, R.mipmap.spile);
             default:
-                return BitmapFactory.decodeResource(res, R.drawable.cpile);
+                return BitmapFactory.decodeResource(res, R.mipmap.cpile);
         }
     }
 
@@ -143,43 +143,43 @@ public class CardHelper {
         Bitmap cardMap = null;
         switch (value) {
             case 1:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_a);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_a);
                 break;
             case 2:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_2);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_2);
                 break;
             case 3:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_3);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_3);
                 break;
             case 4:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_4);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_4);
                 break;
             case 5:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_5);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_5);
                 break;
             case 6:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_6);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_6);
                 break;
             case 7:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_7);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_7);
                 break;
             case 8:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_8);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_8);
                 break;
             case 9:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_9);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_9);
                 break;
             case 10:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_10);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_10);
                 break;
             case 11:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_j);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_j);
                 break;
             case 12:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_q);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_q);
                 break;
             case 13:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.clu_k);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.clu_k);
                 break;
             default:
                 break;
@@ -191,43 +191,43 @@ public class CardHelper {
         Bitmap cardMap = null;
         switch (value) {
             case 1:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_a);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_a);
                 break;
             case 2:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_2);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_2);
                 break;
             case 3:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_3);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_3);
                 break;
             case 4:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_4);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_4);
                 break;
             case 5:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_5);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_5);
                 break;
             case 6:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_6);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_6);
                 break;
             case 7:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_7);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_7);
                 break;
             case 8:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_8);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_8);
                 break;
             case 9:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_9);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_9);
                 break;
             case 10:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_10);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_10);
                 break;
             case 11:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_j);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_j);
                 break;
             case 12:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_q);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_q);
                 break;
             case 13:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.dia_k);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.dia_k);
                 break;
             default:
                 break;
@@ -239,43 +239,43 @@ public class CardHelper {
         Bitmap cardMap = null;
         switch (value) {
             case 1:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_a);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_a);
                 break;
             case 2:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_2);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_2);
                 break;
             case 3:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_3);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_3);
                 break;
             case 4:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_4);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_4);
                 break;
             case 5:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_5);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_5);
                 break;
             case 6:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_6);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_6);
                 break;
             case 7:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_7);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_7);
                 break;
             case 8:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_8);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_8);
                 break;
             case 9:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_9);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_9);
                 break;
             case 10:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_10);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_10);
                 break;
             case 11:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_j);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_j);
                 break;
             case 12:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_q);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_q);
                 break;
             case 13:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.hea_k);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.hea_k);
                 break;
             default:
                 break;
@@ -287,43 +287,43 @@ public class CardHelper {
         Bitmap cardMap = null;
         switch (value) {
             case 1:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_a);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_a);
                 break;
             case 2:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_2);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_2);
                 break;
             case 3:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_3);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_3);
                 break;
             case 4:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_4);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_4);
                 break;
             case 5:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_5);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_5);
                 break;
             case 6:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_6);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_6);
                 break;
             case 7:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_7);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_7);
                 break;
             case 8:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_8);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_8);
                 break;
             case 9:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_9);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_9);
                 break;
             case 10:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_10);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_10);
                 break;
             case 11:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_j);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_j);
                 break;
             case 12:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_q);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_q);
                 break;
             case 13:
-                cardMap = BitmapFactory.decodeResource(res, R.drawable.spa_k);
+                cardMap = BitmapFactory.decodeResource(res, R.mipmap.spa_k);
                 break;
             default:
                 break;
