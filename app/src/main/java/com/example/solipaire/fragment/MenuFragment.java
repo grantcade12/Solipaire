@@ -53,7 +53,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("musicUriString", mAudioFileUri.toString());
         editor.apply();
-        boolean musicBool = settings.getBoolean("musicBool", false);
+        boolean musicBool = settings.getBoolean("musicBool", true);
         musicIntent = new Intent(activity.getApplicationContext(), MusicPlayback.class);
         musicIntent.putExtra("URIString", mAudioFileUri.toString());
         if (musicBool){

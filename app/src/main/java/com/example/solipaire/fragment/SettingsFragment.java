@@ -264,6 +264,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("musicBool",music);
+        editor.apply();
     }
 
     private void resetGame() {
