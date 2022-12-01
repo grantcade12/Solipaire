@@ -23,7 +23,6 @@
             android:text="Password: "
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#444444"
             android:textSize="24sp" />
 
         <TextView
@@ -37,7 +36,6 @@
             android:text="@string/create_account"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FF0000"
             android:textSize="40sp" />
 
         <TextView
@@ -52,7 +50,6 @@
             android:text="User Name: "
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#444444"
             android:textSize="24sp" />
 
         <EditText
@@ -91,10 +88,10 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/kameron_bold"
-            android:text="Re-Enter Password"
+            android:text="@string/re_enter_password"
             android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#444444"
+
             android:textSize="24sp" />
 
         <EditText
@@ -106,7 +103,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="11dp"
             android:ems="10"
-            android:hint="password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <Button
@@ -116,8 +113,9 @@
             android:layout_below="@id/mNewPasswordReEnter"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="75dp"
-            android:background="#FF0000"
             android:text="@string/create_account"
+            android:textColor="@color/black"
+            android:background="@color/red_255"
             android:textSize="34sp" />
 
     </RelativeLayout>

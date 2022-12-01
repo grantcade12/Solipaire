@@ -29,7 +29,7 @@
                     android:text="@string/solipaire"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#FF0000"
+                    android:textColor="@color/red_255"
                     android:textSize="60sp" />
 
                 <Button
@@ -40,8 +40,8 @@
                     android:layout_marginTop="32dp"
 
                     android:layout_marginEnd="29dp"
-                    android:background="#FF0000"
-                    android:backgroundTint="#FF0000"
+                    android:background="@color/red_255"
+
                     android:text="@string/new_game"
                     android:textColor="#000000"
                     android:textSize="48sp" />
@@ -54,8 +54,8 @@
                     android:layout_marginTop="44dp"
 
                     android:layout_marginEnd="29dp"
-                    android:background="#FF0000"
-                    android:backgroundTint="#FF0000"
+                    android:background="@color/red_255"
+
                     android:text="@string/stats"
                     android:textColor="#000000"
                     android:textSize="48sp" />
@@ -88,8 +88,8 @@
 
                     android:layout_marginTop="44dp"
                     android:layout_marginEnd="29dp"
-                    android:background="#FF0000"
-                    android:backgroundTint="#FF0000"
+                    android:background="@color/red_255"
+
                     android:text="@string/how_to_play"
                     android:textColor="#000000"
                     android:textSize="48sp" />
@@ -102,8 +102,8 @@
                     android:layout_marginTop="44dp"
 
                     android:layout_marginEnd="29dp"
-                    android:background="#FF0000"
-                    android:backgroundTint="#FF0000"
+                    android:background="@color/red_255"
+
                     android:text="@string/settings"
                     android:textColor="#000000"
                     android:textSize="48sp" />
