@@ -72,7 +72,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         }
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         newUsernameText = v.findViewById(R.id.settings_changeUser);
-        newUsernameText.setText(settings.getString("displayName", "user"));
+        newUsernameText.setText(settings.getString("name", "user"));
 
         final Button changeUsernameButton = v.findViewById(R.id.settings_changeUserButton);
         if (changeUsernameButton != null) {
