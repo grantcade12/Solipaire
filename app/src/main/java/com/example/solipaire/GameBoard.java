@@ -456,7 +456,7 @@ public class GameBoard extends View {
         for (int i = 0; i < Board.NUMCOLUMNS; i++) {
             List<Card> cardColumn = cardColumns.get(i);
             for (int j = 0; j < cardColumn.size(); j++) {
-                if (cardColumn.get(i) != pickedCard) {
+                if (cardColumn.get(j) != pickedCard) {
                     canvas.drawBitmap(cardColumn.get(j).getCardMap(), drawX + (deltaX * i), drawY + (deltaY * j), paint);
                     cardColumn.get(j).setXLoc(drawX + (deltaX * i));
                     cardColumn.get(j).setYLoc(drawY + (deltaY * j));
